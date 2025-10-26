@@ -1,48 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Case Study — MA Marketing</title>
   <style>
-    * { box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0; background: linear-gradient(to bottom right, #f9f9f9, #e0f2f1); color:#333; }
-    header { background-color:#263238; color:#fff; padding:40px 20px; text-align:center; }
-    header h1 { margin:0; font-size:2.2em; }
-    nav { display:flex; justify-content:center; background:#37474f; }
-    nav a { color:#fff; padding:15px 30px; text-decoration:none; font-weight:bold; }
-    nav a:hover { background:#546e7a; }
-    section { padding:60px 30px; max-width:960px; margin:40px auto; background:white; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
-    h2 { color:#263238; font-size:1.8em; margin-bottom:16px; }
-    footer { background-color:#263238; color:white; text-align:center; padding:20px; }
+    :root{
+      --bg:#f6fbfa;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0f766e;
+      --accent-2:#2563eb;
+      --text:#0f172a;
+      --shadow: 0 8px 30px rgba(15,23,42,0.08);
+      --radius:12px;
+      --max:980px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #f2fbfa 0%, #eef8f7 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:40px 20px;
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+    }
+
+    header.site-header{
+      text-align:center;
+      margin-bottom:28px;
+    }
+    header .brand{
+      display:inline-block;
+      background:linear-gradient(90deg,var(--accent-2),var(--accent));
+      color:white;
+      padding:10px 16px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:0.95rem;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.08);
+    }
+    header h1{
+      margin:18px 0 6px;
+      font-size:1.6rem;
+      letter-spacing:-0.02em;
+    }
+    header p.lead{
+      margin:0;
+      color:var(--muted);
+      font-size:0.97rem;
+    }
+
+    nav.site-nav{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      margin:20px 0 36px;
+      flex-wrap:wrap;
+    }
+    nav.site-nav a{
+      color:var(--accent);
+      text-decoration:none;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(15,118,110,0.06);
+      font-weight:600;
+      font-size:0.92rem;
+    }
+    nav.site-nav a.current{
+      background:var(--accent);
+      color:white;
+      box-shadow: 0 6px 18px rgba(15,118,110,0.12);
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1fr;
+    }
+
+    .card-main{
+      padding:34px;
+    }
+
+    .meta{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      color:var(--muted);
+      font-size:0.9rem;
+      margin-bottom:12px;
+    }
+    .meta .tag{
+      background:rgba(37,99,235,0.08);
+      color:var(--accent-2);
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:0.8rem;
+    }
+
+    h2{
+      margin:6px 0 14px;
+      font-size:1.4rem;
+      color:var(--text);
+    }
+    h3{
+      margin-top:22px;
+      margin-bottom:8px;
+      color:var(--accent);
+      font-size:1.05rem;
+    }
+
+    p{margin:0 0 12px;}
+    ul{margin:0 0 12px 1.2rem}
+
+    /* results box - left aligned now */
+    .results{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:12px;
+    }
+    .stat{
+      background:linear-gradient(180deg,#ffffff,#f8fafc);
+      border-radius:10px;
+      padding:14px;
+      box-shadow: 0 6px 16px rgba(15,23,42,0.04);
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start; /* left-align contents */
+      text-align:left; /* ensure text aligns left */
+    }
+    .stat .num{
+      font-size:1.25rem;
+      font-weight:800;
+      color:var(--accent-2);
+      text-align:left;
+    }
+    .stat .label{
+      margin-top:6px;
+      font-size:0.9rem;
+      color:var(--muted);
+      text-align:left;
+    }
+
+    /* highlight panel */
+    .highlight{
+      margin-top:22px;
+      padding:18px;
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(37,99,235,0.06), rgba(15,118,110,0.03));
+      color:var(--text);
+      border:1px solid rgba(15,118,110,0.06);
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .highlight .dot{
+      width:10px;height:10px;border-radius:50%;background:var(--accent-2);margin-top:6px;flex:0 0 10px;
+    }
+    .highlight p{margin:0;font-weight:600;color:var(--text)}
+
+    footer.site-foot{
+      margin-top:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+
+    /* responsive */
+    @media (max-width:760px){
+      .results{grid-template-columns: repeat(1,1fr);}
+      body{padding:22px}
+      header h1{font-size:1.25rem}
+      .card-main{padding:22px}
+    }
+
   </style>
 </head>
 <body>
-  <header>
-    <h1>MA Marketing</h1>
-    <p>Vet Clinic Booking Systems that Actually Convert</p>
-  </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="case-study.html">Case Study</a>
-    <a href="book.html">Schedule Call</a>
-    <a href="offer.html">Our Solutions</a>
-  </nav>
+  <div class="wrap">
+    <header class="site-header" role="banner">
+      <div class="brand">MA Marketing</div>
+      <h1>Case Study: 34 Bookings in 2 Days — Without Spending a Single Dime on Ads</h1>
+      <p class="lead"><strong>Client Type:</strong> Veterinary Clinic (Faroe Islands)</p>
+    </header>
 
-  <section>
-    <h2>Case Study: 34 Bookings in 2 Days – Zero Ad Spend</h2>
-    <p><strong>Business Type:</strong> Veterinary Clinic</p>
-    <p><strong>The Strategy:</strong> Organic DM Funnel + tailored copy + zero ad spend using only their social media following.</p>
-    <ul>
-      <li>34 bookings in 2 days</li>
-      <li>15 paid bookings worth 22,500 DKK</li>
-      <li>No ad budget used</li>
-    </ul>
-    <p><strong>Why it worked:</strong> Low-barrier intro offer, strong copy, and fast team execution.</p>
-  </section>
+    <nav class="site-nav" role="navigation" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="case-study.html" class="current">Case Study</a>
+      <a href="book.html">Schedule Call</a>
+      <a href="offer.html">Our Solutions</a>
+    </nav>
 
-  <footer>
-    &copy; 2025 MA Marketing
-  </footer>
+    <article class="card" role="article" aria-labelledby="case-title">
+      <div class="card-main">
+        <div class="meta">
+          <span class="tag">Organic DM Funnel</span>
+          <span>— Fast activation of existing social audience</span>
+        </div>
+
+        <h2 id="case-title" style="margin-top:0">The Challenge</h2>
+        <p>Heading into a typically quiet season, the clinic was seeing a sharp drop in bookings. They weren’t running ads, and their existing audience on Instagram and Facebook had never been used for direct outreach. They needed a fast way to fill appointments — without investing in ad spend or changing their internal systems.</p>
+
+        <h3>The Strategy</h3>
+        <p>I implemented a plug-and-play Organic DM Funnel designed to activate their current social media following. The system included:</p>
+        <ul>
+          <li>A high-converting intro offer tailored to their ideal clients</li>
+          <li>Engaging story and post templates to spark attention and urgency</li>
+          <li>Done-for-you DM scripts to help their team respond quickly and close bookings fast</li>
+        </ul>
+        <p>All designed to run on their existing accounts — with zero additional cost.</p>
+
+        <h3>The Results</h3>
+        <div class="results" role="list">
+          <div class="stat" role="listitem" aria-label="Appointments">
+            <div class="num">34</div>
+            <div class="label">appointments booked within 48 hours</div>
+          </div>
+          <div class="stat" role="listitem" aria-label="Paid consultations">
+            <div class="num">15</div>
+            <div class="label">paid consultations (22,500 DKK)</div>
+          </div>
+          <div class="stat" role="listitem" aria-label="Ad spend">
+            <div class="num">0 DKK</div>
+            <div class="label">ad budget used</div>
+          </div>
+        </div>
+
+        <div class="highlight" aria-hidden="false">
+          <div class="dot" aria-hidden="true"></div>
+          <p><strong>Booked out days during one of their slowest months.</strong></p>
+        </div>
+
+        <h3 style="margin-top:18px">Why It Worked</h3>
+        <p>The funnel created a sense of urgency around an irresistible, low-barrier offer. It felt fresh and valuable — not salesy — and gave the clinic's team all the tools they needed to respond quickly, follow up effectively, and close the deal. Fast action. No friction. Real revenue.</p>
+
+      </div>
+    </article>
+
+    <footer class="site-foot" role="contentinfo">
+      &copy; 2025 MA Marketing
+    </footer>
+  </div>
 </body>
 </html>
