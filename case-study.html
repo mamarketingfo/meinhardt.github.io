@@ -1,259 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Case Study — MA Marketing</title>
-  <style>
-    :root{
-      --bg:#f6fbfa;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --accent:#0f766e;
-      --accent-2:#2563eb;
-      --text:#0f172a;
-      --shadow: 0 8px 30px rgba(15,23,42,0.08);
-      --radius:12px;
-      --max:980px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #f2fbfa 0%, #eef8f7 100%);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-      padding:40px 20px;
-    }
+<section class="card">
+  <h2>🔵 Case Study: 34 Bookings in 2 Days — Without Spending a Dime on Ads</h2>
+  <p><strong>Client Type:</strong> Veterinary Clinic (Faroe Islands)<br>
+     <strong>Strategy Used:</strong> Organic DM Funnel</p>
 
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-    }
+  <h3>🐾 The Challenge</h3>
+  <p>The clinic was entering its <strong>slowest season of the year</strong>.<br>
+     No ad budget.<br>
+     No active outreach on Instagram or Facebook.</p>
+  <p>Their audience was there… but completely untapped.<br>
+     They needed a <strong>fast, zero-cost way to fill appointments</strong> — without overloading their staff or changing internal systems.</p>
 
-    header.site-header{
-      text-align:center;
-      margin-bottom:28px;
-    }
-    header .brand{
-      display:inline-block;
-      background:linear-gradient(90deg,var(--accent-2),var(--accent));
-      color:white;
-      padding:10px 16px;
-      border-radius:999px;
-      font-weight:700;
-      font-size:0.95rem;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.08);
-    }
-    header h1{
-      margin:18px 0 6px;
-      font-size:1.6rem;
-      letter-spacing:-0.02em;
-    }
-    header p.lead{
-      margin:0;
-      color:var(--muted);
-      font-size:0.97rem;
-    }
+  <h3>🚀 The Strategy</h3>
+  <p>I implemented a plug-and-play <strong>Organic DM Funnel</strong> that activated their existing audience — fast.</p>
+  <p>Here’s how we made it work:</p>
+  <ul>
+    <li>🧲 Built a low-barrier, limited-time <strong>intro offer</strong> tailored to pet owners</li>
+    <li>📲 Designed <strong>story + post templates</strong> that sparked interest and urgency</li>
+    <li>💬 Wrote <strong>DM scripts</strong> their team could copy-paste to close bookings quickly</li>
+  </ul>
+  <p>All using their current social accounts — with <strong>zero additional cost</strong>.</p>
 
-    nav.site-nav{
-      display:flex;
-      justify-content:center;
-      gap:8px;
-      margin:20px 0 36px;
-      flex-wrap:wrap;
-    }
-    nav.site-nav a{
-      color:var(--accent);
-      text-decoration:none;
-      padding:8px 14px;
-      border-radius:999px;
-      background:rgba(15,118,110,0.06);
-      font-weight:600;
-      font-size:0.92rem;
-    }
-    nav.site-nav a.current{
-      background:var(--accent);
-      color:white;
-      box-shadow: 0 6px 18px rgba(15,118,110,0.12);
-    }
+  <h3>📈 The Results</h3>
+  <ul>
+    <li><strong>34</strong> total appointments booked in just 48 hours</li>
+    <li><strong>15</strong> paid consultations → <strong>22,500 DKK</strong> in new revenue</li>
+    <li><strong>0 DKK</strong> spent on ads</li>
+  </ul>
+  <p>✅ Fully booked — during one of their <em>slowest months</em></p>
 
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      display:grid;
-      grid-template-columns: 1fr;
-    }
+  <h3>💡 Why It Worked</h3>
+  <p>This wasn’t a pushy promo or gimmick.<br>
+     It was a <strong>strategic offer</strong> backed by urgency, social proof, and friction-free team execution.</p>
+  <p>We didn’t just drive clicks. We drove <strong>cash flow</strong> — fast.</p>
 
-    .card-main{
-      padding:34px;
-    }
+  <h3>Want Results Like These?</h3>
+  <p>If your clinic has an audience sitting idle…<br>
+     Let’s turn it into <strong>real bookings</strong> — without spending a cent on ads.</p>
+  <a href="book.html" class="button">Book Your Free Strategy Call</a>
+</section>
 
-    .meta{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      color:var(--muted);
-      font-size:0.9rem;
-      margin-bottom:12px;
-    }
-    .meta .tag{
-      background:rgba(37,99,235,0.08);
-      color:var(--accent-2);
-      padding:6px 10px;
-      border-radius:999px;
-      font-weight:700;
-      font-size:0.8rem;
-    }
-
-    h2{
-      margin:6px 0 14px;
-      font-size:1.4rem;
-      color:var(--text);
-    }
-    h3{
-      margin-top:22px;
-      margin-bottom:8px;
-      color:var(--accent);
-      font-size:1.05rem;
-    }
-
-    p{margin:0 0 12px;}
-    ul{margin:0 0 12px 1.2rem}
-
-    /* results box - left aligned now */
-    .results{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: repeat(3,1fr);
-      gap:12px;
-    }
-    .stat{
-      background:linear-gradient(180deg,#ffffff,#f8fafc);
-      border-radius:10px;
-      padding:14px;
-      box-shadow: 0 6px 16px rgba(15,23,42,0.04);
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start; /* left-align contents */
-      text-align:left; /* ensure text aligns left */
-    }
-    .stat .num{
-      font-size:1.25rem;
-      font-weight:800;
-      color:var(--accent-2);
-      text-align:left;
-    }
-    .stat .label{
-      margin-top:6px;
-      font-size:0.9rem;
-      color:var(--muted);
-      text-align:left;
-    }
-
-    /* highlight panel */
-    .highlight{
-      margin-top:22px;
-      padding:18px;
-      border-radius:10px;
-      background:linear-gradient(180deg, rgba(37,99,235,0.06), rgba(15,118,110,0.03));
-      color:var(--text);
-      border:1px solid rgba(15,118,110,0.06);
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
-    }
-    .highlight .dot{
-      width:10px;height:10px;border-radius:50%;background:var(--accent-2);margin-top:6px;flex:0 0 10px;
-    }
-    .highlight p{margin:0;font-weight:600;color:var(--text)}
-
-    footer.site-foot{
-      margin-top:18px;
-      text-align:center;
-      color:var(--muted);
-      font-size:0.9rem;
-    }
-
-    /* responsive */
-    @media (max-width:760px){
-      .results{grid-template-columns: repeat(1,1fr);}
-      body{padding:22px}
-      header h1{font-size:1.25rem}
-      .card-main{padding:22px}
-    }
-
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header class="site-header" role="banner">
-      <div class="brand">MA Marketing</div>
-      <h1>Case Study: 34 Bookings in 2 Days — Without Spending a Single Dime on Ads</h1>
-      <p class="lead"><strong>Client Type:</strong> Veterinary Clinic (Faroe Islands)</p>
-    </header>
-
-    <nav class="site-nav" role="navigation" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="case-study.html" class="current">Case Study</a>
-      <a href="book.html">Schedule Call</a>
-      <a href="offer.html">Our Solutions</a>
-    </nav>
-
-    <article class="card" role="article" aria-labelledby="case-title">
-      <div class="card-main">
-        <div class="meta">
-          <span class="tag">Organic DM Funnel</span>
-          <span>— Fast activation of existing social audience</span>
-        </div>
-
-        <h2 id="case-title" style="margin-top:0">The Challenge</h2>
-        <p>Heading into a typically quiet season, the clinic was seeing a sharp drop in bookings. They weren’t running ads, and their existing audience on Instagram and Facebook had never been used for direct outreach. They needed a fast way to fill appointments — without investing in ad spend or changing their internal systems.</p>
-
-        <h3>The Strategy</h3>
-        <p>I implemented a plug-and-play Organic DM Funnel designed to activate their current social media following. The system included:</p>
-        <ul>
-          <li>A high-converting intro offer tailored to their ideal clients</li>
-          <li>Engaging story and post templates to spark attention and urgency</li>
-          <li>Done-for-you DM scripts to help their team respond quickly and close bookings fast</li>
-        </ul>
-        <p>All designed to run on their existing accounts — with zero additional cost.</p>
-
-        <h3>The Results</h3>
-        <div class="results" role="list">
-          <div class="stat" role="listitem" aria-label="Appointments">
-            <div class="num">34</div>
-            <div class="label">appointments booked within 48 hours</div>
-          </div>
-          <div class="stat" role="listitem" aria-label="Paid consultations">
-            <div class="num">15</div>
-            <div class="label">paid consultations (22,500 DKK)</div>
-          </div>
-          <div class="stat" role="listitem" aria-label="Ad spend">
-            <div class="num">0 DKK</div>
-            <div class="label">ad budget used</div>
-          </div>
-        </div>
-
-        <div class="highlight" aria-hidden="false">
-          <div class="dot" aria-hidden="true"></div>
-          <p><strong>Booked out days during one of their slowest months.</strong></p>
-        </div>
-
-        <h3 style="margin-top:18px">Why It Worked</h3>
-        <p>The funnel created a sense of urgency around an irresistible, low-barrier offer. It felt fresh and valuable — not salesy — and gave the clinic's team all the tools they needed to respond quickly, follow up effectively, and close the deal. Fast action. No friction. Real revenue.</p>
-
-      </div>
-    </article>
-
-    <footer class="site-foot" role="contentinfo">
-      &copy; 2025 MA Marketing
-    </footer>
-  </div>
-</body>
-</html>
