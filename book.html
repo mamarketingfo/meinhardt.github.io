@@ -223,13 +223,16 @@
           Your responses help us vet fit and ensure the guarantee applies to your clinic.
         </p>
        <form>
-          <section class="card">
-      <!-- modify this form HTML and place wherever you want your form -->
-      <form
-        action="https://formspree.io/f/xyzbzyzw"
-        method="POST"
-      >
-          -->
+         <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+<script>
+  /* paste this line in verbatim */
+  window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+  /* customize formbutton below*/     
+  formbutton("create", {
+    action: "https://formspree.io/f/xyzbzyzw",
+    title: "Fill out this form to see if you meet our criteria",
+    fields: [
+      { 
           <div>
             <label for="name">Your Full Name</label>
             <input type="text" id="name" name="name" placeholder="Write your name and last name here here" required />
@@ -293,9 +296,18 @@
   </label>
   <textarea id="why" name="why" placeholder="What makes you and your clinic deserving of a partnership with us?" required></textarea>
 </div>
-
-<button type="submit" class="button submit">Submit &amp; Get Calendar Link</button>
-
+      { type: "submit" }      
+    ],
+    styles: {
+      title: {
+        backgroundColor: "gray"
+      },
+      button: {
+        backgroundColor: "gray"
+      }
+    }
+  });
+</script>
 
       <section class="card">
         <h2>Our Vetting &amp; Guarantee</h2>
