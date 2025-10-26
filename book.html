@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schedule Your Strategy Call — MA Marketing</title>
+  <style>
+    :root {
+      --bg: #f6fbfa;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #0f766e;
+      --accent-2: #2563eb;
+      --text: #0f172a;
+      --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+      --radius: 12px;
+      --max: 980px;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #f2fbfa 0%, #eef8f7 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+      padding: 40px 20px;
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    header.site-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    header .brand {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      color: white;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    }
+    header h1 {
+      margin: 18px 0 6px;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+    }
+    header p.lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+    nav.site-nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px 0 36px;
+      flex-wrap: wrap;
+    }
+    nav.site-nav a {
+      color: var(--accent);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.06);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    nav.site-nav a.current {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 6px 18px rgba(15, 118, 110, 0.12);
+    }
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+    h2 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+    p {
+      margin: 0 0 12px;
+    }
+    .steps {
+      display: grid;
+      gap: 14px;
+      margin: 20px 0 28px;
+    }
+    .step {
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+    }
+    .step strong {
+      display: block;
+      color: var(--accent-2);
+      margin-bottom: 4px;
+    }
+    form {
+      display: grid;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    label {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(15, 23, 42, 0.16);
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: #f8fafc;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .button {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 14px 24px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1em;
+      text-align: center;
+      font-weight: 600;
+    }
+    .button:hover {
+      background: #0a5e58;
+    }
+    .submit {
+      justify-self: start;
+      border: none;
+      cursor: pointer;
+    }
+    .faq {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .faq-item {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+    footer.site-foot {
+      margin-top: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <div class="brand">MA Marketing</div>
+      <h1>Book Your Free Strategy Call</h1>
+      <p class="lead">Share a few details and we'll confirm a time within one business day.</p>
+    </header>
+
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="case-study.html">Case Study</a>
+      <a href="book.html" class="current">Schedule Call</a>
+      <a href="offer.html">Our Solutions</a>
+    </nav>
+
+    <div class="grid">
+      <section class="card">
+        <h2>What to Expect</h2>
+        <p>The call is a 20-minute conversation to understand your clinic, your current booking process, and where you want to grow. You’ll leave with a clear plan of the funnel we would implement for you.</p>
+        <div class="steps">
+          <div class="step">
+            <strong>Step 1</strong>
+            Complete the form so we can prepare for the call.
+          </div>
+          <div class="step">
+            <strong>Step 2</strong>
+            We’ll send you a calendar link with times that work for your schedule.
+          </div>
+          <div class="step">
+            <strong>Step 3</strong>
+            Jump on a strategy session with our founder, review quick wins, and see if we’re a fit.
+          </div>
+        </div>
+        <form>
+          <div>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+          </div>
+          <div>
+            <label for="clinic">Clinic Name</label>
+            <input type="text" id="clinic" name="clinic" placeholder="Happy Paws Veterinary" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@clinic.com" required />
+          </div>
+          <div>
+            <label for="patients">Monthly patient visits</label>
+            <select id="patients" name="patients" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="under-100">Under 100</option>
+              <option value="100-250">100 – 250</option>
+              <option value="251-500">251 – 500</option>
+              <option value="501-plus">501+</option>
+            </select>
+          </div>
+          <div>
+            <label for="goal">Primary growth goal</label>
+            <textarea id="goal" name="goal" placeholder="Tell us where you want your bookings to be in 90 days"></textarea>
+          </div>
+          <button type="submit" class="button submit">Submit &amp; Get Calendar Link</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Need to Know</h2>
+        <div class="faq">
+          <div class="faq-item">
+            <h3>Is the call really free?</h3>
+            <p>Yes. The session is purely diagnostic—if we’re not confident we can add revenue quickly, we’ll tell you straight away.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Who will I speak with?</h3>
+            <p>You’ll talk directly with our founder, Marcus, who has built high-converting funnels for leading veterinary practices across Europe.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What happens after?</h3>
+            <p>We’ll either invite you into one of our funnel packages or share a checklist of action items you can implement internally—no pressure either way.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="site-foot">
+      &copy; 2025 MA Marketing | We respect your time and inbox.
+    </footer>
+  </div>
+</body>
+</html>
