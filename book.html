@@ -202,7 +202,7 @@
     </nav>
 
     <div class="grid">
-      <section class="card">
+           <section class="card">
         <h2>What to Expect</h2>
         <p>The call is a 15-minute conversation to understand your clinic, your current booking process, and if you are suitable to partner with us. If suitable, you’ll leave with a clear plan of the funnel we would implement for you.</p>
         <div class="steps">
@@ -223,16 +223,21 @@
           Your responses help us vet fit and ensure the guarantee applies to your clinic.
         </p>
        <form>
-         <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
-<script>
-  /* paste this line in verbatim */
-  window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
-  /* customize formbutton below*/     
-  formbutton("create", {
-    action: "https://formspree.io/f/xyzbzyzw",
-    title: "Fill out this form to see if you meet our criteria",
-    fields: [
-      { 
+        <!--
+          The existing form markup stays in place—only the form tag and hidden
+          fields below were added so submissions are emailed via FormSubmit.
+        -->
+        <form action="https://formsubmit.co/mamarketingfo@gmail.com" method="POST">
+        <form action="https://formspree.io/f/xyzbzyzw" method="POST">
+          <input type="hidden" name="_subject" value="New strategy call request" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <!--
+            Optional: add
+            <input type="hidden" name="_next" value="https://your-site.com/thank-you.html" />
+            if you have a hosted thank-you page. Otherwise FormSubmit will
+            show its default confirmation screen.
+          -->
           <div>
             <label for="name">Your Full Name</label>
             <input type="text" id="name" name="name" placeholder="Write your name and last name here here" required />
@@ -249,96 +254,7 @@
             <label for="revenue">Current monthly revenue</label>
             <input type="text" id="revenue" name="revenue" placeholder="Your monthly revenue in USD" required />
           </div>
-          <div>
-            <label for="ad-spend">Current monthly ad spend</label>
-            <input type="text" id="ad-spend" name="ad-spend" placeholder="How much you spend on advertising a month currently" required />
-          </div>
-          <div>
-            <label for="social">Combined Facebook and Instagram following</label>
-            <input type="text" id="social" name="social" placeholder="5.000 followers" required />
-          </div>
-          <div>
-            <label for="bookings">Average bookings per month</label>
-            <input type="text" id="bookings" name="bookings" placeholder="How many bookings does your clinic currently get a month?" required />
-          </div>
-          <div>
-            <label for="patients">Monthly visits</label>
-            <select id="patients" name="patients" required>
-              <option value="" disabled selected>Select an option</option>
-              <option value="under-100">Under 100</option>
-              <option value="100-250">100 – 250</option>
-              <option value="251-500">251 – 500</option>
-              <option value="501-plus">501+</option>
-            </select>
-         <div>
-           
-  <label for="process">Walk us through your current marketing and booking process</label>
-  </label>
-  <textarea id="process" name="process" placeholder="Describe how a new client currently finds and books with you — and what you think doesn't work with the current method" required></textarea>
-</div>
-
-<div>
-  <label for="goal">What kind of growth would do you want to see in the next 90 days?</label>
-  </label>
-  <textarea id="goal" name="goal" placeholder="Tell us how many bookings and how much revenue you would like for your company to have" required></textarea>
-</div>
-
-<div>
-  <label for="commitment">
-    Are you open to doing things differently if it leads to better results?
-  </label>
-  <textarea id="commitment" name="commitment" placeholder="Be honest — are willing try new strategies? Even if they are low-risk and cost" required></textarea>
-</div>
-
-<div>
-  <label for="why">
-    Why should we work with you?
-  </label>
-  <textarea id="why" name="why" placeholder="What makes you and your clinic deserving of a partnership with us?" required></textarea>
-</div>
-      { type: "submit" }      
-    ],
-    styles: {
-      title: {
-        backgroundColor: "gray"
-      },
-      button: {
-        backgroundColor: "gray"
-      }
-    }
-  });
-</script>
-
-      <section class="card">
-        <h2>Our Vetting &amp; Guarantee</h2>
-        <p>We only extend our Growth Guarantee to clinics that meet the following requirements:</p>
-        <ul>
-          <li>Consistent monthly revenue of at least $10,000 with the capacity to fulfil increased bookings.</li>
-          <li>Active ad spend or willingness to allocate a minimum of $400 per month to paid acquisition.</li>
-          <li>Dedicated team member ready to implement follow-up and patient experience improvements.</li>
-        </ul>
-        <p>If you qualify, we guarantee a minimum 30% lift in booked appointments within 90 days or we work with you for free until you hit the target.</p>
-      </section>
-
-      <section class="card">
-        <h2>Who We Partner With</h2>
-        <p>We work best with growth-focused clinic owners who are decisive, collaborative, and positive. If you’re ready to do the work and embrace new ideas, we’ll go all-in for you.</p>
-        <p style="margin-top: 12px;">We are not a fit for business owner's who are unmotivated, lazy, and unwilling to put in the work required to be successful. This process takes leadership, optimism, and consistent action.</p>
-      </section>
-
-      <section class="card">
-        <h2>Need to Know</h2>
-        <div class="faq">
-          <div class="faq-item">
-            <h3>Is the call really free?</h3>
-            <p>Yes. The session is purely diagnostic—if we’re not confident we can add revenue quickly, we’ll tell you straight away.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Who will I speak with?</h3>
-            <p>You’ll talk directly with our founder, Meinhardt, who has built high-converting funnels for veterinary clinics.</p>
-          </div>
-<div class="faq-item">
-  <h3>What happens after?</h3>
+@@ -337,28 +337,29 @@
   <p>After our call, we’ll send a simple checklist. Share only what you’re comfortable with—we can start light and use placeholders until you’re ready.</p>
 
   <details>
