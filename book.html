@@ -222,37 +222,51 @@
         <p style="margin: 12px 0 0; font-weight: 600; color: var(--accent-2);">
           Your responses help us vet fit and ensure the guarantee applies to your clinic.
         </p>
-        <form>
+       <form>
+        <!--
+          The existing form markup stays in place—only the form tag and hidden
+          fields below were added so submissions are emailed via FormSubmit.
+        -->
+        <form action="https://formsubmit.co/mamarketingfo@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New strategy call request" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <!--
+            Optional: add
+            <input type="hidden" name="_next" value="https://your-site.com/thank-you.html" />
+            if you have a hosted thank-you page. Otherwise FormSubmit will
+            show its default confirmation screen.
+          -->
           <div>
             <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+            <input type="text" id="name" name="name" placeholder="Write your name and last name here here" required />
           </div>
           <div>
-            <label for="clinic">Clinic Name</label>
-            <input type="text" id="clinic" name="clinic" placeholder="Happy Paws Veterinary" required />
+            <label for="clinic">Name of your Business</label>
+            <input type="text" id="clinic" name="clinic" placeholder="Name of your businesses" required />
           </div>
           <div>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="you@clinic.com" required />
+            <input type="email" id="email" name="email" placeholder="your@emailadress.com" required />
           </div>
           <div>
             <label for="revenue">Current monthly revenue</label>
-            <input type="text" id="revenue" name="revenue" placeholder="$45,000" required />
+            <input type="text" id="revenue" name="revenue" placeholder="Your monthly revenue in USD" required />
           </div>
           <div>
             <label for="ad-spend">Current monthly ad spend</label>
-            <input type="text" id="ad-spend" name="ad-spend" placeholder="$3,500" required />
+            <input type="text" id="ad-spend" name="ad-spend" placeholder="How much you spend on advertising a month currently" required />
           </div>
           <div>
-            <label for="social">Combined social media following</label>
-            <input type="text" id="social" name="social" placeholder="8,500" required />
+            <label for="social">Combined Facebook and Instagram following</label>
+            <input type="text" id="social" name="social" placeholder="5.000 followers" required />
           </div>
           <div>
             <label for="bookings">Average bookings per month</label>
-            <input type="text" id="bookings" name="bookings" placeholder="75" required />
+            <input type="text" id="bookings" name="bookings" placeholder="How many bookings does your clinic currently get a month?" required />
           </div>
           <div>
-            <label for="patients">Monthly patient visits</label>
+            <label for="patients">Monthly visits</label>
             <select id="patients" name="patients" required>
               <option value="" disabled selected>Select an option</option>
               <option value="under-100">Under 100</option>
@@ -260,22 +274,39 @@
               <option value="251-500">251 – 500</option>
               <option value="501-plus">501+</option>
             </select>
+            <textarea id="challenge" name="challenge" placeholder="Why should we work with your clinic?" required></textarea>
           </div>
-          <div>
-            <label for="goal">Primary growth goal</label>
-            <textarea id="goal" name="goal" placeholder="Tell us where you want your bookings to be in 90 days" required></textarea>
-          </div>
-          <div>
-            <label for="challenge">What prompted you to reach out right now?</label>
-            <textarea id="challenge" name="challenge" placeholder="Share the challenges or opportunities that made this call a priority" required></textarea>
-          </div>
-          <div>
-            <label for="process">Describe your current marketing and booking process, including the roadblocks holding you back.</label>
-            <textarea id="process" name="process" placeholder="Walk us through how a lead currently becomes a paying client and where the bottlenecks appear" required></textarea>
-          </div>
-          <button type="submit" class="button submit">Submit &amp; Get Calendar Link</button>
-        </form>
-      </section>
+         <div>
+  <label for="process">
+    Walk us through your current marketing and booking process.<br>
+    Where do leads drop off or get stuck?
+  </label>
+  <textarea id="process" name="process" placeholder="Describe how a new client currently finds and books with you — and where the roadblocks show up." required></textarea>
+</div>
+
+<div>
+  <label for="goal">
+    What kind of growth would you love to see in the next 90 days?
+  </label>
+  <textarea id="goal" name="goal" placeholder="Tell us where you'd like bookings, revenue, or client volume to be." required></textarea>
+</div>
+
+<div>
+  <label for="commitment">
+    Are you open to doing things differently if it leads to better results?
+  </label>
+  <textarea id="commitment" name="commitment" placeholder="Be honest — are you ready to take fast action, try new strategies, and go all in?" required></textarea>
+</div>
+
+<div>
+  <label for="why">
+    Why should we work with you?
+  </label>
+  <textarea id="why" name="why" placeholder="What makes you and your clinic a good fit for this kind of growth partnership?" required></textarea>
+</div>
+
+<button type="submit" class="button submit">Submit &amp; Get Calendar Link</button>
+
 
       <section class="card">
         <h2>Our Vetting &amp; Guarantee</h2>
