@@ -99,6 +99,10 @@
     p {
       margin: 0 0 12px;
     }
+    ul {
+      margin: 12px 0 16px;
+      padding-left: 20px;
+    }
     .steps {
       display: grid;
       gap: 14px;
@@ -185,6 +189,9 @@
       <div class="brand">MA Marketing</div>
       <h1>Book Your Free Strategy Call</h1>
       <p class="lead">Share a few details and we'll confirm a time within one business day.</p>
+      <p class="lead" style="margin-top: 10px; color: var(--accent); font-weight: 600;">
+        We can only take on 3 more clinics this month—secure your slot before the calendar fills up.
+      </p>
     </header>
 
     <nav class="site-nav">
@@ -205,13 +212,16 @@
           </div>
           <div class="step">
             <strong>Step 2</strong>
-            We’ll send you a calendar link with times that work for your schedule.
+            We’ll review your answers and confirm you meet our vetting criteria.
           </div>
           <div class="step">
             <strong>Step 3</strong>
-            Jump on a strategy session with our founder, review quick wins, and see if we’re a fit.
+            Receive a calendar link, jump on a strategy session with our founder, review quick wins, and see if we’re a fit.
           </div>
         </div>
+        <p style="margin: 12px 0 0; font-weight: 600; color: var(--accent-2);">
+          Your responses help us vet fit and ensure the guarantee applies to your clinic.
+        </p>
         <form>
           <div>
             <label for="name">Your Name</label>
@@ -226,6 +236,22 @@
             <input type="email" id="email" name="email" placeholder="you@clinic.com" required />
           </div>
           <div>
+            <label for="revenue">Current monthly revenue</label>
+            <input type="text" id="revenue" name="revenue" placeholder="$45,000" required />
+          </div>
+          <div>
+            <label for="ad-spend">Current monthly ad spend</label>
+            <input type="text" id="ad-spend" name="ad-spend" placeholder="$3,500" required />
+          </div>
+          <div>
+            <label for="social">Combined social media following</label>
+            <input type="text" id="social" name="social" placeholder="8,500" required />
+          </div>
+          <div>
+            <label for="bookings">Average bookings per month</label>
+            <input type="text" id="bookings" name="bookings" placeholder="75" required />
+          </div>
+          <div>
             <label for="patients">Monthly patient visits</label>
             <select id="patients" name="patients" required>
               <option value="" disabled selected>Select an option</option>
@@ -237,10 +263,35 @@
           </div>
           <div>
             <label for="goal">Primary growth goal</label>
-            <textarea id="goal" name="goal" placeholder="Tell us where you want your bookings to be in 90 days"></textarea>
+            <textarea id="goal" name="goal" placeholder="Tell us where you want your bookings to be in 90 days" required></textarea>
+          </div>
+          <div>
+            <label for="challenge">What prompted you to reach out right now?</label>
+            <textarea id="challenge" name="challenge" placeholder="Share the challenges or opportunities that made this call a priority" required></textarea>
+          </div>
+          <div>
+            <label for="process">Describe your current marketing and booking process, including the roadblocks holding you back.</label>
+            <textarea id="process" name="process" placeholder="Walk us through how a lead currently becomes a paying client and where the bottlenecks appear" required></textarea>
           </div>
           <button type="submit" class="button submit">Submit &amp; Get Calendar Link</button>
         </form>
+      </section>
+
+      <section class="card">
+        <h2>Our Vetting &amp; Guarantee</h2>
+        <p>We only extend our Growth Guarantee to clinics that meet the following requirements:</p>
+        <ul>
+          <li>Consistent monthly revenue of at least $30,000 with the capacity to fulfil increased bookings.</li>
+          <li>Active ad spend or willingness to allocate a minimum of $2,000 per month to paid acquisition.</li>
+          <li>Dedicated team member ready to implement follow-up and patient experience improvements.</li>
+        </ul>
+        <p>If you qualify, we guarantee a minimum 30% lift in booked appointments within 90 days or we work with you for free until you hit the target.</p>
+      </section>
+
+      <section class="card">
+        <h2>Who We Partner With</h2>
+        <p>We work best with growth-focused clinic owners who are decisive, collaborative, and positive. If you’re ready to do the work and embrace new ideas, we’ll go all-in for you.</p>
+        <p style="margin-top: 12px;">We are not a fit for people who are lazy, unwilling to put in the work, closed-minded, or carry a negative mindset. This process takes leadership, optimism, and consistent action.</p>
       </section>
 
       <section class="card">
