@@ -1,0 +1,14 @@
+<svg width="220" height="160" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+<title>VÍ logo placeholder</title>
+<defs>
+  <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#8a4f5b" />
+    <stop offset="100%" stop-color="#643640" />
+  </linearGradient>
+</defs>
+<rect x="14" y="18" width="190" height="120" rx="28" fill="url(#g)" opacity="0.14" />
+<path d="M44 36h20l34 82h-22l-6-16h-36l-6 16H6L44 36Zm8 48h20l-10-28-10 28Z" fill="#643640" opacity="0.9" transform="translate(52 6)" />
+<circle cx="84" cy="62" r="18" fill="#fdf5f7" stroke="#643640" stroke-width="4" />
+<circle cx="138" cy="68" r="22" fill="#fff7f9" stroke="#8a4f5b" stroke-width="4" />
+<path d="M75 62c4-8 14-8 18 0M126 68c5-10 17-10 22 0" stroke="#643640" stroke-width="4" stroke-linecap="round" fill="none" />
+</svg>

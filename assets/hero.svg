@@ -1,0 +1,38 @@
+<svg width="640" height="640" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title>Kelidýr í tryggum hondum</title>
+  <desc>Vinalig illustratión av hundi og kettu í heitum litum.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffaf6" />
+      <stop offset="100%" stop-color="#f2e7e1" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffd8cc" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#ffd8cc" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="640" height="640" rx="48" fill="url(#bg)" />
+  <circle cx="190" cy="190" r="120" fill="#643640" opacity="0.06" />
+  <circle cx="460" cy="180" r="140" fill="#643640" opacity="0.05" />
+  <circle cx="320" cy="340" r="240" fill="url(#glow)" />
+  <path d="M120 400c0-90 80-140 200-140s200 50 200 140-80 140-200 140-200-50-200-140Z" fill="#fff" stroke="#e9d6d8" stroke-width="10" />
+  <path d="M232 334c6-36 34-66 70-66s64 28 70 66" fill="#fffaf6" stroke="#c69aa4" stroke-width="10" stroke-linecap="round" />
+  <path d="M212 394c10-26 34-44 90-44s80 18 90 44" fill="#fffaf6" stroke="#643640" stroke-width="10" stroke-linecap="round" />
+  <path d="M214 430c0-38 32-70 90-70s90 32 90 70v26c0 22-18 40-40 40H254c-22 0-40-18-40-40v-26Z" fill="#fff" stroke="#643640" stroke-width="10" stroke-linejoin="round" />
+  <path d="M260 372c-12-26-54-30-70 0-12 22-6 56 12 68 18 14 40 2 46-14" fill="#f9ecec" stroke="#643640" stroke-width="8" stroke-linecap="round" />
+  <path d="M408 372c12-26 54-30 70 0 12 22 6 56-12 68-18 14-40 2-46-14" fill="#f9ecec" stroke="#643640" stroke-width="8" stroke-linecap="round" />
+  <ellipse cx="284" cy="418" rx="14" ry="12" fill="#643640" />
+  <ellipse cx="356" cy="418" rx="14" ry="12" fill="#643640" />
+  <path d="M304 438c12 12 36 12 48 0" stroke="#643640" stroke-width="8" stroke-linecap="round" fill="none" />
+  <path d="M290 402c-4-10-22-10-26 2" stroke="#c69aa4" stroke-width="8" stroke-linecap="round" />
+  <path d="M370 402c4-10 22-10 26 2" stroke="#c69aa4" stroke-width="8" stroke-linecap="round" />
+  <circle cx="256" cy="358" r="14" fill="#fff" stroke="#643640" stroke-width="6" />
+  <circle cx="384" cy="358" r="14" fill="#fff" stroke="#643640" stroke-width="6" />
+  <path d="M194 312c-18-32 10-66 42-66 16 0 30 8 38 22" stroke="#c69aa4" stroke-width="10" stroke-linecap="round" fill="none" />
+  <path d="M446 312c18-32-10-66-42-66-16 0-30 8-38 22" stroke="#c69aa4" stroke-width="10" stroke-linecap="round" fill="none" />
+  <path d="M246 468c-6 34 12 54 76 54s82-20 76-54" stroke="#c69aa4" stroke-width="10" stroke-linecap="round" fill="none" />
+  <path d="M154 408c-28-30-14-80 24-96 26-12 52 0 60 22" stroke="#643640" stroke-width="10" stroke-linecap="round" fill="none" />
+  <path d="M486 408c28-30 14-80-24-96-26-12-52 0-60 22" stroke="#643640" stroke-width="10" stroke-linecap="round" fill="none" />
+  <path d="M220 270c-16-24 2-50 26-52 20-2 36 12 36 30" stroke="#c69aa4" stroke-width="10" stroke-linecap="round" fill="none" />
+  <path d="M420 270c16-24-2-50-26-52-20-2-36 12-36 30" stroke="#c69aa4" stroke-width="10" stroke-linecap="round" fill="none" />
+</svg>

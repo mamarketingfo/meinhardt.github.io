@@ -1,0 +1,33 @@
+<svg width="600" height="800" viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+<title>Owner with puppies</title>
+<defs>
+  <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#fff7f5" />
+    <stop offset="100%" stop-color="#f0e0e4" />
+  </linearGradient>
+</defs>
+<rect width="600" height="800" rx="48" fill="url(#bg1)" />
+<circle cx="300" cy="260" r="150" fill="#643640" opacity="0.08" />
+<rect x="140" y="280" width="320" height="360" rx="80" fill="#cfa7b3" opacity="0.6" />
+<circle cx="300" cy="260" r="110" fill="#fff" stroke="#643640" stroke-width="12" />
+<path d="M250 240c8-26 34-36 50-16" stroke="#643640" stroke-width="12" stroke-linecap="round" fill="none" />
+<path d="M326 226c22-20 48-10 52 18" stroke="#643640" stroke-width="12" stroke-linecap="round" fill="none" />
+<circle cx="280" cy="270" r="10" fill="#643640" />
+<circle cx="340" cy="270" r="10" fill="#643640" />
+<path d="M292 302c16 12 36 12 52 0" stroke="#643640" stroke-width="10" stroke-linecap="round" fill="none" />
+<g transform="translate(110 520)">
+  <ellipse cx="70" cy="70" rx="64" ry="58" fill="#fff" stroke="#643640" stroke-width="10" />
+  <circle cx="52" cy="60" r="8" fill="#643640" />
+  <circle cx="94" cy="60" r="8" fill="#643640" />
+</g>
+<g transform="translate(230 540)">
+  <ellipse cx="70" cy="70" rx="64" ry="58" fill="#fff" stroke="#643640" stroke-width="10" />
+  <circle cx="52" cy="60" r="8" fill="#643640" />
+  <circle cx="94" cy="60" r="8" fill="#643640" />
+</g>
+<g transform="translate(350 520)">
+  <ellipse cx="70" cy="70" rx="64" ry="58" fill="#fff" stroke="#643640" stroke-width="10" />
+  <circle cx="52" cy="60" r="8" fill="#643640" />
+  <circle cx="94" cy="60" r="8" fill="#643640" />
+</g>
+</svg>

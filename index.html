@@ -1,145 +1,485 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fo">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home — MA Marketing</title>
+  <title>Veterinerviðgerðir við tryggleika</title>
   <style>
     :root {
-      --bg: #f6fbfa;
+      --bg: #fdfbf7;
+      --bg-soft: #fbf3ef;
       --card: #ffffff;
-      --muted: #6b7280;
-      --accent: #0f766e;
-      --accent-2: #2563eb;
-      --text: #0f172a;
-      --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
-      --radius: 12px;
-      --max: 980px;
+      --muted: #5f5a60;
+      --text: #2a2427;
+      --accent: #643640;
+      --accent-soft: #e7d6d9;
+      --accent-contrast: #fff5f7;
+      --shadow: 0 12px 40px rgba(52, 17, 25, 0.12);
+      --radius: 18px;
+      --max: 1120px;
     }
-    * {
-      box-sizing: border-box;
-    }
-    html,
-    body {
-      height: 100%;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #f2fbfa 0%, #eef8f7 100%);
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, #fff 0%, #fdf7f2 60%, #faf2ed 100%);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      line-height: 1.5;
-      padding: 40px 20px;
+      padding: 32px 18px 64px;
     }
     .wrap {
       max-width: var(--max);
       margin: 0 auto;
     }
     header.site-header {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-    header .brand {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--accent-2), var(--accent));
-      color: white;
-      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.92);
       border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 12px 36px rgba(100, 54, 64, 0.08);
+      position: sticky;
+      top: 14px;
+      backdrop-filter: blur(12px);
+      z-index: 10;
     }
-    header h1 {
-      margin: 18px 0 6px;
-      font-size: 1.6rem;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1rem;
       letter-spacing: -0.02em;
+      color: var(--text);
     }
-    header p.lead {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.97rem;
+    .brand img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 18px rgba(52, 17, 25, 0.1));
     }
     nav.site-nav {
       display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin: 20px 0 36px;
+      gap: 10px;
+      align-items: center;
       flex-wrap: wrap;
+      justify-content: flex-end;
     }
     nav.site-nav a {
-      color: var(--accent);
       text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(15, 118, 110, 0.06);
+      color: var(--text);
       font-weight: 600;
-      font-size: 0.92rem;
+      padding: 10px 14px;
+      border-radius: 12px;
+      transition: all 200ms ease;
     }
-    nav.site-nav a.current {
+    nav.site-nav a:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .hero {
+      margin-top: 38px;
+      padding: 52px 48px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(100, 54, 64, 0.06), rgba(255, 255, 255, 0.95));
+      box-shadow: 0 18px 48px rgba(100, 54, 64, 0.14);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #f0e6e9;
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(-12deg); }
+      50% { transform: translateY(-10px) rotate(-8deg); }
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-contrast);
+      color: var(--accent);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      box-shadow: 0 8px 24px rgba(100, 54, 64, 0.16);
+    }
+    .hero h1 {
+      margin: 16px 0 12px;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      letter-spacing: -0.03em;
+      color: #2a1a1f;
+    }
+    .hero p.lead {
+      margin: 0 0 22px;
+      color: #4e4348;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .trust-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px 12px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      color: #4e4348;
+      font-weight: 600;
+    }
+    .trust-list li {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #fff9f7;
+      border-radius: 12px;
+      border: 1px solid #f1e2e5;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+      box-shadow: 0 12px 30px rgba(100, 54, 64, 0.18);
       background: var(--accent);
-      color: white;
-      box-shadow: 0 6px 18px rgba(15, 118, 110, 0.12);
+      color: #fff;
     }
-    .card {
+    .btn.secondary {
+      background: transparent;
+      color: var(--accent);
+      box-shadow: none;
+      border: 1.5px solid var(--accent);
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .hero-visual {
+      position: relative;
+      min-height: 320px;
+      display: grid;
+      place-items: center;
+      z-index: 1;
+    }
+    .hero-visual .circle {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fffefd, #ffeae0 80%);
+      border: 12px solid var(--accent-soft);
+      box-shadow: 0 24px 48px rgba(100, 54, 64, 0.16);
+      position: relative;
+      overflow: hidden;
+      animation: floaty 10s ease-in-out infinite;
+    }
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .floating-card {
+      position: absolute;
+      bottom: 16px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.94);
+      padding: 14px 18px;
+      border-radius: 14px;
+      box-shadow: 0 12px 28px rgba(52, 17, 25, 0.18);
+      backdrop-filter: blur(6px);
+      animation: fadeIn 1.2s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .section {
+      margin-top: 52px;
+    }
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 1.6rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .section p.lead { color: var(--muted); margin: 0 0 22px; }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .service-card {
+      background: linear-gradient(180deg, #fff, #fff9f6);
+      border-radius: var(--radius);
+      padding: 18px 18px 20px;
+      box-shadow: 0 12px 32px rgba(100, 54, 64, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+      animation: fadeIn 0.9s ease both;
+      border: 1px solid #f1e2e5;
+    }
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: -50% auto auto -30%;
+      width: 120px;
+      height: 120px;
+      background: var(--accent-soft);
+      border-radius: 50%;
+      opacity: 0.3;
+      transform: scale(0.9);
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(52, 17, 25, 0.14);
+    }
+    .service-title {
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .soft-cta, .guides, .team {
       background: var(--card);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 34px;
+      box-shadow: 0 14px 36px rgba(100, 54, 64, 0.1);
+      padding: 32px;
+      border: 1px solid #f1e2e5;
     }
-    h2 {
-      margin-top: 0;
+    .soft-cta { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; align-items: center; }
+    .soft-cta h3 { margin: 0 0 10px; font-size: 1.3rem; }
+    .guides { margin-top: 32px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-contrast);
       color: var(--accent);
+      font-weight: 700;
     }
-    p {
-      margin: 0 0 12px;
+    .guide-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px 16px;
+      margin: 18px 0;
+      padding: 0;
+      list-style: none;
     }
-    .button {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      padding: 14px 24px;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 1em;
-      margin-top: 20px;
+    .guide-list li {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 12px 14px;
+      border: 1px solid #f0e6e9;
+      line-height: 1.6;
     }
-    .button:hover {
-      background: #004d40;
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .team-card {
+      background: linear-gradient(180deg, #fff, #fff7f3);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 16px 36px rgba(100, 54, 64, 0.12);
+      overflow: hidden;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+      border: 1px solid #f0e6e9;
+    }
+    .team-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(52, 17, 25, 0.18); }
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 14px;
+      object-fit: cover;
+      margin-bottom: 12px;
+      background: #f5e9ed;
     }
     footer.site-foot {
-      margin-top: 40px;
-      text-align: center;
+      margin-top: 46px;
+      padding: 22px 0;
+      border-top: 1px solid #eee1e4;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .foot-col { display: flex; flex-direction: column; gap: 8px; }
+    @media (max-width: 720px) {
+      header.site-header { position: relative; top: 0; flex-direction: column; align-items: flex-start; }
+      nav.site-nav { justify-content: flex-start; }
+      body { padding: 20px 16px 48px; }
+      .hero { padding: 28px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header class="site-header">
-      <div class="brand">MA Marketing</div>
-      <h1>Vet Clinic Booking Systems that Actually Convert</h1>
-      <p class="lead">Helping veterinary clinics attract more bookings with proven funnel strategies</p>
+      <div class="brand">
+        <img src="assets/logo.svg" alt="Djóralæknastovan VÍ logo" />
+        Djóralæknastovan VÍ
+      </div>
+      <nav class="site-nav">
+        <a href="#taenastur">Tænastur</a>
+        <a href="#vegleiding">Vegleiðing</a>
+        <a href="#samband">Samband</a>
+        <a href="#um">Um okkum</a>
+      </nav>
     </header>
 
-    <nav class="site-nav">
-      <a href="index.html" class="current">Home</a>
-      <a href="case-study.html">Case Study</a>
-      <a href="book.html">Schedule Call</a>
-      <a href="offer.html">Our Solutions</a>
-    </nav>
+    <section class="hero" id="samband">
+      <div class="hero-text">
+        <div class="eyebrow">Trygg hond um títt kelidýr</div>
+        <h1>Tá dýrið vísir sjúkutekin, er gott við einum djóralækna, tú kanst líta á</h1>
+        <p class="lead">Vit taka okkum av tínum kelidýri við umsorgan og 20 ára royndum. Tú kanst kenna teg tryggan frá fyrsta degi.</p>
+        <div class="cta-row">
+          <a class="btn" href="#taenastur">Bóka eina vitjan</a>
+          <a class="btn secondary" href="#vegleiding">Les vegleiðingar</a>
+        </div>
+        <ul class="trust-list">
+          <li>🐾 24/7 telefonvakt, tá tú ert í iva</li>
+          <li>💜 Altíð sama toymið, sum kennir djórið</li>
+          <li>🩺 Nýmótans útgerð og rein, ljós høli</li>
+        </ul>
+      </div>
+      <div class="hero-visual">
+        <div class="circle">
+          <img src="assets/hero.svg" alt="Hundur og ketta í tryggum høli" />
+        </div>
+        <div class="floating-card">
+          <strong>Røkt frá fyrsta degi</strong><br />
+          Skjótar kanningar & trygg ráðgeving
+        </div>
+      </div>
+    </section>
 
-    <section class="card">
-      <h2>Welcome to MA Marketing</h2>
-      <p>We specialize in helping veterinary clinics consistently attract more clients and appointments using both organic and paid marketing funnels. Our system is designed to fit your existing workflows, bring fast wins, and create long-term growth.</p>
-      <p>Book a free strategy call to find out if your clinic qualifies — no commitment required.</p>
-      <a href="book.html" class="button">Book Your Free Strategy Call</a>
+    <section class="section" id="taenastur">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span class="pill">Tænastur</span>
+        <h2 style="margin:0;">Alt frá heilsukanning til bráðfeingishjálp</h2>
+      </div>
+      <p class="lead">Vit gera tað lætt at fáa skjóta hjálp, áðan tú verður ørkymlað/ur. Vel eina tænastu, sum hóskar til teg og títt dýr.</p>
+      <div class="services">
+        <div class="service-card" style="animation-delay:0.05s;">
+          <div class="service-title">Heilsukanning & vanlig vitjan</div>
+          Reglulig eftirlit, førandi leiðbeining og góð ráð so tú altíð veitst, hvat er best fyri dýrið.
+        </div>
+        <div class="service-card" style="animation-delay:0.1s;">
+          <div class="service-title">Skurðviðger & Sterilisering</div>
+          Tryggar skurðviðgerðir við góðari eftirviðgerð og greiðari vegleiðing heim.
+        </div>
+        <div class="service-card" style="animation-delay:0.15s;">
+          <div class="service-title">Tannrøkt og munnheilsa</div>
+          Professionell reingerð, tannkanning og ráðgeving, ið ger munnin heilsugóðan.
+        </div>
+        <div class="service-card" style="animation-delay:0.2s;">
+          <div class="service-title">Koppseting og fyribyrgjandi røkt</div>
+          Koppseting, pípukanning og vørur, sum verja móti teimum mest vanligu trupulleikunum.
+        </div>
+        <div class="service-card" style="animation-delay:0.25s;">
+          <div class="service-title">Røntgen, ultraljóð og kanning</div>
+          Nýmótans útgerð til at finna orsøkina skjótari og við minni óvissu.
+        </div>
+        <div class="service-card" style="animation-delay:0.3s;">
+          <div class="service-title">Bráðfeingishjálp og avlíving</div>
+          Vit eru her, tá tað er skund. Umsorgan til síðsta andadrátt við virðing og rú.
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft-cta">
+      <div>
+        <h3>Ivast tú? Byrja við eini heilsukanning</h3>
+        <p>Tá tú ert í iva, og djórið vísir sjúkutekin, er tað lætt at blíva bæði bangin og ørkymlaður. Heilsukanning er best, tá tú ikki heilt ert sikkur í hvat er galið og bara vilt hava skjótt svar.</p>
+      </div>
+      <div>
+        <a class="btn" href="#samband">Bóka tíð til heilsukanning</a>
+      </div>
+    </section>
+
+    <section class="section guides" id="vegleiding">
+      <span class="pill">Vegleiðingar</span>
+      <h2>Hvat merkja ymisku tekin?</h2>
+      <p class="lead">Tá tú ert óviss, og djórið vísir tekin, sum tú ikki kennir aftur, er tað lætt at føla seg bæði bangnan og ørkymlaðan. Tosa vit beint út: tú vilt bara vita, um tú skalt koma beinavegin ella um tað kann bíða.</p>
+      <p class="lead">Tað er júst tað, hesar vegleiðingar eru gjørdar til. Tær vísa tær:</p>
+      <ul class="guide-list">
+        <li>Nær tað er bráðfeingis, og tú eigur at koma skjótt</li>
+        <li>Nær tað kann bíða nakrar tímar ella til dagin eftir</li>
+        <li>Hvat tekinini kunnu merkja, og hvussu tú kanst hjálpa djórinum heima</li>
+        <li>Vegleiðingin er skrivað og týdd av útbúgvnum djóralæknum</li>
+        <li>Hon ger tað nógv lættari at vita, hvat tú skalt gera</li>
+        <li>Nær tað er rætt at bóka eina tíð</li>
+      </ul>
+      <a class="btn" href="#taenastur">Les vegleiðingarnar</a>
+    </section>
+
+    <section class="section team" id="um">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span class="pill">Um okkum</span>
+        <h2 style="margin:0;">Hví velja okkum?</h2>
+      </div>
+      <p class="lead">Vit eru eitt toymi av djóralæknum við røkt í hørmuni og smíli á varrum. Tú kennir okkum – og vit kenna teg og tínar kelidýr.</p>
+      <div class="team-grid">
+        <div class="team-card">
+          <img class="team-photo" src="assets/owner1.svg" alt="Djóralækni Bergur við smáum hundum" />
+          <strong>Bergur</strong><br />
+          Serfrøði í heilsukanning og stuðli til nýggjar eigarar.
+        </div>
+        <div class="team-card">
+          <img class="team-photo" src="assets/owner2.svg" alt="Djóralækni Karin við kollie" />
+          <strong>Karin</strong><br />
+          Tryggar skurðviðgerðir og fyribyrgjandi røkt við rú og ró.
+        </div>
+        <div class="team-card">
+          <img class="team-photo" src="assets/owner3.svg" alt="Djóralækni Sólrun í starvi" />
+          <strong>Sólrun</strong><br />
+          Bráðfeingishjálp og vegleiðing, tá alt skal ganga skjótt og trygt.
+        </div>
+      </div>
     </section>
 
     <footer class="site-foot">
-      &copy; 2025 MA Marketing | Built with ❤️ for Vet Clinics
+      <div class="foot-col">
+        <strong>Sosialir miðlar</strong>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+      </div>
+      <div class="foot-col">
+        <strong>Resources</strong>
+        <a href="#vegleiding">Vegleiðingar</a>
+        <a href="#taenastur">Tænastur</a>
+        <a href="#samband">Bóka tíð</a>
+      </div>
+      <div class="foot-col">
+        <strong>Policies</strong>
+        <a href="#">Privatlívspolitikkur</a>
+        <a href="#">Treytingar</a>
+        <a href="#um">Um okkum</a>
+      </div>
     </footer>
   </div>
 </body>
