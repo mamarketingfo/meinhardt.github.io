@@ -1,145 +1,330 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fo">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home — MA Marketing</title>
+  <title>Djóralæknatænastan — Umsorgan og heilsurøkt</title>
   <style>
     :root {
-      --bg: #f6fbfa;
+      --bg: #ffffff;
+      --panel: #d6ced3;
       --card: #ffffff;
       --muted: #6b7280;
-      --accent: #0f766e;
-      --accent-2: #2563eb;
-      --text: #0f172a;
-      --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
-      --radius: 12px;
-      --max: 980px;
+      --accent: #643640;
+      --accent-2: #6f414e;
+      --text: #111827;
+      --radius: 18px;
+      --shadow: 0 18px 40px rgba(17, 24, 39, 0.12);
+      --max: 1180px;
     }
-    * {
-      box-sizing: border-box;
-    }
-    html,
-    body {
-      height: 100%;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #f2fbfa 0%, #eef8f7 100%);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      line-height: 1.5;
-      padding: 40px 20px;
+      line-height: 1.6;
     }
-    .wrap {
+    a { color: inherit; }
+    .page {
       max-width: var(--max);
       margin: 0 auto;
+      padding: 18px 18px 80px;
     }
-    header.site-header {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-    header .brand {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--accent-2), var(--accent));
-      color: white;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
-    }
-    header h1 {
-      margin: 18px 0 6px;
-      font-size: 1.6rem;
-      letter-spacing: -0.02em;
-    }
-    header p.lead {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.97rem;
-    }
-    nav.site-nav {
+    .topbar {
       display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin: 20px 0 36px;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: #374151;
+      font-weight: 500;
+      margin-bottom: 10px;
       flex-wrap: wrap;
     }
-    nav.site-nav a {
-      color: var(--accent);
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(15, 118, 110, 0.06);
-      font-weight: 600;
-      font-size: 0.92rem;
-    }
-    nav.site-nav a.current {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 6px 18px rgba(15, 118, 110, 0.12);
-    }
-    .card {
+    .topbar .contact-row { display: flex; gap: 18px; flex-wrap: wrap; }
+    .topbar span { display: inline-flex; align-items: center; gap: 8px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+    nav.main-nav {
       background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 34px;
+      border-radius: 999px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
+      margin-bottom: 18px;
     }
-    h2 {
-      margin-top: 0;
-      color: var(--accent);
-    }
-    p {
-      margin: 0 0 12px;
-    }
-    .button {
-      display: inline-block;
-      background: var(--accent);
+    nav .logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; color: var(--text); text-decoration: none; }
+    nav .logo img { width: 80px; height: 54px; object-fit: contain; }
+    nav .links { display: flex; gap: 12px; flex-wrap: wrap; margin-left: auto; align-items: center; }
+    nav .links a { text-decoration: none; color: #111827; padding: 10px 14px; border-radius: 12px; font-weight: 600; }
+    nav .links a:hover, nav .links a.active { background: rgba(17, 24, 39, 0.06); }
+    nav .social { display: flex; gap: 10px; align-items: center; }
+    .pill { display: inline-block; padding: 8px 14px; border-radius: 999px; font-weight: 700; }
+    .pill.outline { border: 1px solid rgba(100,54,64,0.25); color: var(--accent); background: rgba(100,54,64,0.06); }
+    .hero {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(120deg, rgba(100,54,64,0.92) 0%, rgba(111,65,78,0.65) 45%, rgba(214,206,211,0.4) 100%),
+        url('https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1600&q=80') center/cover;
+      min-height: 420px;
       color: white;
-      padding: 14px 24px;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 1em;
-      margin-top: 20px;
+      padding: 46px;
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
     }
-    .button:hover {
-      background: #004d40;
+    .hero .content { max-width: 520px; }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
     }
-    footer.site-foot {
-      margin-top: 40px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
+    .hero p { margin: 0 0 16px; color: rgba(255,255,255,0.9); font-size: 1.05rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 22px; border-radius: 12px; font-weight: 800; text-decoration: none; transition: transform 120ms ease, box-shadow 120ms ease; }
+    .btn.primary { background: var(--accent); color: #ffffff; box-shadow: 0 10px 24px rgba(100,54,64,0.26); }
+    .btn.primary:hover { background: #5a3040; transform: translateY(-1px); }
+    .btn.secondary { background: transparent; color: var(--accent); border: 1px solid rgba(100,54,64,0.4); box-shadow: none; }
+    .hero .btn.secondary { color: #ffffff; border-color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.12); }
+    .hero .badges { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .grid { display: grid; gap: 20px; }
+    .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: stretch; }
+    .card { background: var(--card); border-radius: var(--radius); padding: 26px; box-shadow: 0 16px 36px rgba(17, 24, 39, 0.08); }
+    h2 { margin: 0 0 10px; font-size: 1.6rem; letter-spacing: -0.01em; }
+    h3 { margin: 0 0 6px; color: var(--accent-2); }
+    .muted { color: var(--muted); }
+    .checklist { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; }
+    .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: flex-start; }
+    .check { width: 18px; height: 18px; border-radius: 50%; background: rgba(100,54,64,0.12); display: inline-flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 800; }
+    .image-card { position: relative; border-radius: var(--radius); overflow: hidden; min-height: 320px; box-shadow: 0 16px 36px rgba(17, 24, 39, 0.16); }
+    .image-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .image-card .overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(17,24,39,0.6) 0%, rgba(17,24,39,0.05) 50%); display: flex; align-items: flex-start; justify-content: flex-start; padding: 18px; color: #fff; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .service-card { background: #ffffff; border-radius: 16px; padding: 18px; border: 1px solid rgba(17,24,39,0.06); box-shadow: 0 10px 24px rgba(17,24,39,0.06); }
+    .service-card strong { display: block; font-size: 1.05rem; margin-bottom: 6px; }
+    .service-card p { margin: 0; color: #4b5563; }
+    .service-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(111, 65, 78, 0.08); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; color: var(--accent-2); font-weight: 900; }
+    .band {
+      background: var(--panel);
+      color: #111827;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .band h2 { color: var(--text); margin: 0 0 8px; }
+    .band .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+    .band .btn { border-radius: 999px; background: var(--accent); color: #ffffff; box-shadow: 0 10px 18px rgba(100,54,64,0.22); }
+    .band .btn.secondary { background: #ffffff; color: var(--accent); border: 1px solid rgba(100,54,64,0.18); box-shadow: none; }
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; align-items: center; }
+    .photo-frame { border-radius: 18px; overflow: hidden; box-shadow: 0 16px 36px rgba(17,24,39,0.08); }
+    .photo-frame img { width: 100%; display: block; }
+    .map-card { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); min-height: 360px; }
+    .map-card iframe { border: 0; width: 100%; height: 100%; }
+    form .field { display: grid; gap: 6px; margin-bottom: 14px; }
+    form label { font-weight: 700; color: #374151; }
+    form input, form textarea, form select {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(17,24,39,0.12);
+      font-size: 1rem;
+      font-family: inherit;
+      width: 100%;
+      background: #f9fafb;
+    }
+    form textarea { min-height: 120px; resize: vertical; }
+    footer { margin-top: 32px; text-align: center; color: #6b7280; font-size: 0.95rem; }
+    @media (max-width: 768px) {
+      nav.main-nav { flex-wrap: wrap; gap: 10px; justify-content: center; }
+      nav .links { justify-content: center; width: 100%; }
+      .hero { padding: 32px; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="site-header">
-      <div class="brand">MA Marketing</div>
-      <h1>Vet Clinic Booking Systems that Actually Convert</h1>
-      <p class="lead">Helping veterinary clinics attract more bookings with proven funnel strategies</p>
-    </header>
+  <div class="page">
+    <div class="topbar">
+      <div class="contact-row">
+        <span>📍 Heiðavegur 99</span>
+        <span>📞 +298 31 55 33</span>
+      </div>
+      <div class="contact-row">
+        <span>✉️ info@veterinarian.fo</span>
+        <span class="pill outline">Fá tíð til dýrið</span>
+      </div>
+    </div>
 
-    <nav class="site-nav">
-      <a href="index.html" class="current">Home</a>
-      <a href="case-study.html">Case Study</a>
-      <a href="book.html">Schedule Call</a>
-      <a href="offer.html">Our Solutions</a>
+    <nav class="main-nav">
+      <a class="logo" href="#hero">
+        <img src="assets/logo.svg" alt="Logo hjá Djóralæknatænastuni" />
+        <span>Djóralæknatænastan</span>
+      </a>
+      <div class="links">
+        <a href="#taenastur" class="active">Tænastur</a>
+        <a href="#ivast">Heilsukanning</a>
+        <a href="#velja">Hví velja</a>
+        <a href="#fyrispurningur">Ráðgeving</a>
+        <a href="#contact">Fá samband</a>
+      </div>
+      <div class="social">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="dot" aria-hidden="true"></span>
+      </div>
     </nav>
 
-    <section class="card">
-      <h2>Welcome to MA Marketing</h2>
-      <p>We specialize in helping veterinary clinics consistently attract more clients and appointments using both organic and paid marketing funnels. Our system is designed to fit your existing workflows, bring fast wins, and create long-term growth.</p>
-      <p>Book a free strategy call to find out if your clinic qualifies — no commitment required.</p>
-      <a href="book.html" class="button">Book Your Free Strategy Call</a>
+    <section id="hero" class="hero">
+      <div class="content">
+        <div class="badges">
+          <span class="pill outline">Tú kanst líta á</span>
+        </div>
+        <h1>Tá dýrið vísir sjúkutekin, er gott við einum djóralækna, tú kanst líta á</h1>
+        <p>Vit taka okkum av tínum kelidýri við umsorgan og yvir 20 ára royndum. Tú sleppur undan óvissu og kanst kenna teg tryggan frá fyrsta degi.</p>
+        <div class="badges">
+          <span class="pill outline">Heilsukanning</span>
+          <span class="pill outline">Koppseting</span>
+          <span class="pill outline">Skurðviðgerð</span>
+          <span class="pill outline">Tannrøkt</span>
+        </div>
+        <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+          <a href="#contact" class="btn primary">Bóka tíð</a>
+          <a href="#ivast" class="btn secondary">Les meira</a>
+        </div>
+      </div>
     </section>
 
-    <footer class="site-foot">
-      &copy; 2025 MA Marketing | Built with ❤️ for Vet Clinics
+    <div class="split" style="margin: 24px 0;">
+      <div class="card">
+        <h2>Heilsukanning & vanlig vitjan</h2>
+        <p>Vit kanna djórið og geva tær ráð um næstu stigini. Trygg viðgerð við djóralæknum sum seta tíð av og greiða frá áðrenn okkurt verður gjørt.</p>
+        <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;">
+          <a class="btn primary" href="#contact">Bóka tíð</a>
+          <a class="btn secondary" href="#taenastur">Sjá allar tænastur</a>
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=1300&q=80" alt="Kelin hundur fær umsorgan" />
+        <div class="overlay">
+          <div>
+            <div class="pill" style="background: rgba(255,255,255,0.82); color: #111827;">Fleiri enn 20 ár av royndum</div>
+            <p style="margin: 10px 0 0; max-width: 320px;">Vit taka okkum av tínum kelidýri við umsorgan og 20 ára royndum. Tú kanst kenna teg tryggan frá fyrsta degi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="taenastur" class="card">
+      <h2>Tænastur hjá Djóralæknatænastuni</h2>
+      <p class="muted">Vit veita øllum dýrum alla vanliga veterinera viðgerð. Tríggir djóralæknar, nærlagdir og vandnir. Dagførd teknisk útgerð.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">✓</div>
+          <strong>Heilsukanning og vanlig vitjan</strong>
+          <p>Vit kanna djórið og geva tær ráð um næstu stigini.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🩺</div>
+          <strong>Skurðviðgerðir</strong>
+          <p>Sterilisering, gelding og aðrar viðgerðir við tryggari frágreiðing.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🦷</div>
+          <strong>Tannrøkt og munnheilsa</strong>
+          <p>Reinsing, polering og viðgerðir av tonnunum, so pína ikki veksur.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💉</div>
+          <strong>Koppseting og fyribyrgjandi røkt</strong>
+          <p>Tú tryggjar djórinum vernd og betri longd á heilsuni.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔍</div>
+          <strong>Røntgen og ultraljóð</strong>
+          <p>Fyri at finna orsøkirnar tá nakað ikki er, sum tað plagar.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🧪</div>
+          <strong>Starvsstovukanning</strong>
+          <p>Ormur, Giardia, blóðroyndir og aðrar neyðugar kanningar.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔖</div>
+          <strong>Chipmerking</strong>
+          <p>So tú altíð veitst, hvar kelidýrið er.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⏱️</div>
+          <strong>Bráðfeingishjálp og avlíving</strong>
+          <p>Trygg hjálp, ráðgeving og stuðul tá tú hevur størst tørv.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ivast" class="band" style="margin: 26px 0;">
+      <h2>Ivast tú? Byrja við eini heilsukanning</h2>
+      <p>Tá djórið broytir atburð, er tað lætt at blíva bæði bangin og ørkymlaður. Heilsukanning er best, tá tú ikki ert heilt sikkur í hvat bagir. Tú sleppur undan óvissu og kanst kenna teg tryggan, tí tú veitst, hvat hendir við tínum djóri.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#contact">Bóka heilsukanning</a>
+        <a class="btn secondary" href="#taenastur">Les um allar tænastur</a>
+      </div>
+    </section>
+
+    <section id="velja" class="two-col" style="margin: 26px 0;">
+      <div class="photo-frame">
+        <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=1300&q=80" alt="Bygningur hjá djóralækna" />
+      </div>
+      <div class="card">
+        <h2>Hví velja okkum?</h2>
+        <ul class="checklist">
+          <li><span class="check">✓</span><span>Hjá okkum møtir tú útbúnum djóralæknum sum seta umsorgan og virðing hægst.</span></li>
+          <li><span class="check">✓</span><span>Vit hava serkunnleika í bæði smáum og stórum djórum.</span></li>
+          <li><span class="check">✓</span><span>Vit hava yvir 20 ár av royndum.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="fyrispurningur" class="card">
+      <div class="pill" style="background: rgba(100,54,64,0.08); color: var(--accent);">Heilsukanning</div>
+      <h2>Tørvar tær eina fakliga meting?</h2>
+      <p class="muted">Ring ella skriva til okkum á Messenger, so ráðgeva vit tær, ókeypis um bestu loysnina fyri tykkum.</p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px;">
+        <a class="btn primary" href="#contact">Fá tíð</a>
+        <a class="btn secondary" href="#contact">Fá samband</a>
+      </div>
+    </section>
+
+    <section id="contact" class="grid" style="margin-top: 26px;">
+      <div class="map-card">
+        <iframe title="Kort til Djóralæknatænastuna" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2073.842820476086!2d-6.8170895!3d62.1076891!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48bc1ea6bb6d21d7%3A0xb0142d98ae035a13!2sHe%C3%B0avegur%2099%2C%20T%C3%B3rshavn!5e0!3m2!1sen!2sfo!4v1700000000000!5m2!1sen!2sfo" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="card">
+        <h2>Fá samband</h2>
+        <p class="muted">Send okkum ein fyrispurning ella bið um eina tíð. Vit seta tíð av til at lurta eftir tær og greiða frá áðrenn okkurt verður gjørt.</p>
+        <form>
+          <div class="field">
+            <label for="name">Navn</label>
+            <input id="name" name="name" type="text" placeholder="Ditt navn" />
+          </div>
+          <div class="field">
+            <label for="email">Teldupostur</label>
+            <input id="email" name="email" type="email" placeholder="navn@dømi.fo" />
+          </div>
+          <div class="field">
+            <label for="phone">Telefon</label>
+            <input id="phone" name="phone" type="tel" placeholder="+298 ..." />
+          </div>
+          <div class="field">
+            <label for="message">Boð</label>
+            <textarea id="message" name="message" placeholder="Hvat hevur djórið tørv á?"></textarea>
+          </div>
+          <a class="btn primary" href="#">Send fyrispurning</a>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 Djóralæknatænastan — Vit taka okkum av tínum kelidýri við umsorgan.
     </footer>
   </div>
 </body>
