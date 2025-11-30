@@ -1,0 +1,24 @@
+<svg width="640" height="800" viewBox="0 0 640 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Veterinarian in surgery</title>
+  <desc id="desc">Illustrative portrait of a veterinarian operating on a small animal.</desc>
+  <defs>
+    <linearGradient id="room" x1="0%" x2="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8eff9" />
+      <stop offset="100%" stop-color="#f7fafc" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="800" fill="url(#room)" />
+  <rect y="500" width="640" height="300" fill="#c1d9f0" />
+  <g transform="translate(180 210)">
+    <path d="M120 160c-10-34-6-78 30-86s66 22 68 60-12 72-44 88c-26 12-36-12-48-62z" fill="#d6c8b5" />
+    <path d="M52 258c0-80 46-146 116-146s116 66 116 146c0 20-12 32-28 40-46 22-132 22-176 0-16-8-28-20-28-40z" fill="#15803d" />
+    <path d="M16 238c-4-58 20-104 72-138l16 54-44 86z" fill="#1f9250" />
+  </g>
+  <g transform="translate(80 360)">
+    <rect x="84" y="140" width="320" height="140" rx="28" fill="#f1f5f9" stroke="#0f172a" stroke-width="8" />
+    <path d="M240 216c-10-26-6-58 18-66s56 12 60 42c4 30-8 56-34 66-22 8-32-12-44-42z" fill="#f8fafc" stroke="#0f172a" stroke-width="8" />
+    <path d="M112 250c0-40 24-74 60-90 36-16 76-6 96 24 20 32 8 70-20 92-32 26-92 34-120 14-10-8-16-20-16-40z" fill="#fff" stroke="#0f172a" stroke-width="10" />
+    <path d="M160 208c32-40 104-40 144-8" stroke="#2563eb" stroke-width="12" stroke-linecap="round" fill="none" />
+  </g>
+  <text x="50%" y="760" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" fill="#1f2937" font-weight="700">Málena — Skurð- og smádýralækni</text>
+</svg>

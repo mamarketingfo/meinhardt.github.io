@@ -1,0 +1,18 @@
+<svg width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Anna Joensen</title>
+  <desc id="desc">Portrett av veterinara eigara Anna.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdfbfb" />
+      <stop offset="100%" stop-color="#d6ced3" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" rx="40" fill="url(#bg)" />
+  <circle cx="300" cy="220" r="120" fill="#f6eef1" stroke="#c4b6bb" stroke-width="10" />
+  <path d="M220 460c0-88 52-140 80-140s80 52 80 140" fill="#643640" opacity="0.12" />
+  <circle cx="268" cy="210" r="16" fill="#643640" />
+  <circle cx="332" cy="210" r="16" fill="#643640" />
+  <path d="M260 244c20 24 60 24 80 0" stroke="#643640" stroke-width="10" fill="none" stroke-linecap="round" />
+  <path d="M244 196c-12-36 36-54 48-16" stroke="#6f414e" stroke-width="12" fill="none" stroke-linecap="round" />
+  <path d="M308 186c18-32 58-14 44 20" stroke="#6f414e" stroke-width="12" fill="none" stroke-linecap="round" />
+</svg>

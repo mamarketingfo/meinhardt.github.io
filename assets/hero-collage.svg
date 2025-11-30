@@ -1,0 +1,38 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Veteriner klinikk collage</title>
+  <desc id="desc">Mjúk collage við hundi og kettu í varma litapallett.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdfbfb" />
+      <stop offset="100%" stop-color="#d6ced3" />
+    </linearGradient>
+    <linearGradient id="sun" x1="0%" x2="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffede5" />
+      <stop offset="100%" stop-color="#f6d6d8" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" rx="40" />
+  <circle cx="360" cy="200" r="140" fill="url(#sun)" />
+  <path d="M0 640c220-120 420-110 640 30s380 120 540 60 280-120 420-110v280H0Z" fill="#f6eef1" />
+  <path d="M120 620c160-80 320-80 520 40s360 120 540 40 280-120 420-80v220H120Z" fill="#e8dfe3" />
+  <g transform="translate(440 380)">
+    <path d="M280 220c-14-80-120-160-230-130-46 12-78 54-86 104-10 66 20 118 70 140 58 26 130 8 166-62 20 16 40 16 60 4 22-14 34-40 20-56Z" fill="#fff7f5" stroke="#643640" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="140" cy="210" r="10" fill="#643640" />
+    <circle cx="210" cy="208" r="10" fill="#643640" />
+    <path d="M162 236c14 12 30 12 44 0" stroke="#643640" stroke-width="8" fill="none" stroke-linecap="round" />
+    <path d="M82 176c-16-32 22-66 46-34" stroke="#6f414e" stroke-width="12" fill="none" stroke-linecap="round" />
+    <path d="M222 172c12-28 46-10 36 18" stroke="#6f414e" stroke-width="12" fill="none" stroke-linecap="round" />
+    <path d="M52 240c-38 12-66 38-72 82" stroke="#c4b6bb" stroke-width="10" fill="none" stroke-linecap="round" />
+  </g>
+  <g transform="translate(880 330)">
+    <path d="M140 320c120 20 230-60 222-190-4-66-46-124-110-140-74-20-144 26-168 94-12 34-14 74-16 114-2 40 42 112 72 122Z" fill="#fdf9f7" stroke="#643640" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="190" cy="214" r="12" fill="#643640" />
+    <circle cx="254" cy="224" r="12" fill="#643640" />
+    <path d="M206 246c18 18 40 18 62 0" stroke="#643640" stroke-width="8" fill="none" stroke-linecap="round" />
+    <path d="M154 198c-10-34 32-60 48-24" stroke="#6f414e" stroke-width="12" fill="none" stroke-linecap="round" />
+    <path d="M270 198c14-28 48-10 36 16" stroke="#6f414e" stroke-width="12" fill="none" stroke-linecap="round" />
+    <path d="M154 320c-28 18-48 48-54 82" stroke="#c4b6bb" stroke-width="10" fill="none" stroke-linecap="round" />
+  </g>
+  <rect x="120" y="120" width="200" height="80" rx="18" fill="#643640" opacity="0.14" />
+  <rect x="1340" y="120" width="120" height="120" rx="32" fill="#6f414e" opacity="0.12" />
+</svg>
