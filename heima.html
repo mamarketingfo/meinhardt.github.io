@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="fo">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heima Reingerð</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50" style="font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+  <div id="root"></div>
+  <script type="module">
+    import React, { useState, useEffect } from 'https://esm.sh/react@18.2.0';
+    import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
+    import {
+      Sparkles,
+      Check,
+      ArrowRight,
+      ArrowLeft,
+      Calendar,
+      Clock,
+      Home,
+      Heart,
+      Star,
+      TrendingUp,
+      Users,
+      Shield,
+      Award,
+      BookOpen,
+      MessageCircle,
+      Edit3,
+      Trash2,
+      Plus,
+    } from 'https://esm.sh/lucide-react@0.378.0?dev';
+
+    if (!window.storage) {
+      window.storage = {
+        async get(key) {
+          return { value: localStorage.getItem(key) };
+        },
+        async set(key, value) {
+          localStorage.setItem(key, value);
+          return true;
+        },
+      };
+    }
+
+    const HeimaReingerd = () => {
+      const [step, setStep] = useState('welcome');
+      const [currentUser, setCurrentUser] = useState(null);
+      const [bookings, setBookings] = useState([]);
+      const [editingBooking, setEditingBooking] = useState(null);
+      const [editingDraft, setEditingDraft] = useState(null);
+
+      const [onboardingData, setOnboardingData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
+        frequency: '',
+        day: '',
+        time: '',
+        rooms: 1,
+        bathrooms: 1,
+      });
+
+      const frequencyOptions = [
+        { value: 'weekly', label: 'Hvørja viku', subtitle: 'Hvørja viku á tínum degi', discount: 15 },
+        { value: 'biweekly', label: 'Hvønn 14. dag', subtitle: 'Hvørja aðra viku', discount: 10 },
+        { value: 'monthly', label: 'Hvønn mánaða', subtitle: 'Eina ferð um mánaðin', discount: 5 },
+        { value: 'custom', label: 'Serstakt', subtitle: 'Vel tína egnu skipan', discount: 0 },
+      ];
+
+      const days = ['Mánadagur', 'Týsdagur', 'Mikudagur', 'Hósdagur', 'Fríggjadagur', 'Leygardagur'];
+      const timeSlots = ['08:00 - 10:00', '10:00 - 12:00', '12:00 - 14:00', '14:00 - 16:00', '16:00 - 18:00'];
+
+      const blogPosts = [
+        {
+          id: 1,
+          title: 'Hvussu Anna frá Tórshavn fær tíð til familjuna',
+          category: 'Kundasøgur',
+          image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800',
+          excerpt: 'Eftir at eg byrjaði at brúka Heima Reingerð, havi eg fingið 4 tímar aftur hvørja viku.',
+          date: '5. Des 2024',
+          readTime: '3 min',
+        },
+        {
+          id: 2,
+          title: '5 ráð til at halda heiminum reinum ímillum reingerðir',
+          category: 'Ráðlegging',
+          image: 'https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?w=800',
+          excerpt: 'Lær hvussu tú kanst gera smáar venjur, sum gera stóran mun fyri at halda heiminum nøttum.',
+          date: '2. Des 2024',
+          readTime: '5 min',
+        },
+        {
+          id: 3,
+          title: 'Hvat er innifalið í eini djúpreingerð?',
+          category: 'Vitan',
+          image: 'https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=800',
+          excerpt: 'Vit fara ígjøgnum alla smálutirnar í okkara djúpreingerð, so tú veitst nágreiniliga hvat tú fært.',
+          date: '28. Nov 2024',
+          readTime: '4 min',
+        },
+        {
+          id: 4,
+          title: 'Møt Mariu - Okkara stjørnu reingerðarkona í Klaksvík',
+          category: 'Lið',
+          image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800',
+          excerpt: 'Maria hevur verið hjá okkum í 3 ár og er ein av okkara mest elskað reingerðarfólkum. Les hennara søgu.',
+          date: '25. Nov 2024',
+          readTime: '6 min',
+        },
+      ];
+
+      const priceMatrix = {
+        '1-1': 500,
+        '1-2': 600,
+        '2-1': 600,
+        '2-2': 700,
+        '3-1': 700,
+        '3-2': 800,
+        '4-1': 850,
+        '4-2': 900,
+        '5-1': 950,
+        '5-2': 1000,
+        '6-1': 1050,
+        '6-2': 1100,
+        '7-1': 1150,
+        '7-2': 1200,
+      };
+
+      const getPrice = (rooms, bathrooms, frequency) => {
+        const r = rooms || onboardingData.rooms;
+        const b = bathrooms || onboardingData.bathrooms;
+        const f = frequency || onboardingData.frequency;
+        const key = `${r}-${b}`;
+        const basePrice = priceMatrix[key] || 500;
+        const discount = frequencyOptions.find((fo) => fo.value === f)?.discount || 0;
+        const discountedPrice = basePrice - (basePrice * discount) / 100;
+        return { basePrice, discountedPrice, discount };
+      };
+
+      useEffect(() => {
+        const loadData = async () => {
+          try {
+            const userResult = await window.storage.get('heima-user');
+            if (userResult?.value) {
+              const user = JSON.parse(userResult.value);
+              setCurrentUser(user);
+              setStep('home');
+            }
+          } catch (error) {
+            console.log('Eingin brúkari funnin');
+          }
+
+          try {
+            const bookingsResult = await window.storage.get('heima-bookings');
+            if (bookingsResult?.value) {
+              setBookings(JSON.parse(bookingsResult.value));
+            }
+          } catch (error) {
+            console.log('Eingi bókingar funnar');
+          }
+        };
+        loadData();
+      }, []);
+
+      const saveUser = async (user) => {
+        try {
+          await window.storage.set('heima-user', JSON.stringify(user));
+          setCurrentUser(user);
+        } catch (error) {
+          console.error('Villa við at goyma brúkara:', error);
+        }
+      };
+
+      const saveBookings = async (newBookings) => {
+        try {
+          await window.storage.set('heima-bookings', JSON.stringify(newBookings));
+          setBookings(newBookings);
+        } catch (error) {
+          console.error('Villa við at goyma bókingar:', error);
+        }
+      };
+
+      const resetOnboarding = () => {
+        setOnboardingData({
+          name: currentUser?.name || '',
+          email: currentUser?.email || '',
+          phone: currentUser?.phone || '',
+          address: currentUser?.address || '',
+          frequency: '',
+          day: '',
+          time: '',
+          rooms: 1,
+          bathrooms: 1,
+        });
+      };
+
+      const completeOnboarding = async () => {
+        const user =
+          currentUser || {
+            name: onboardingData.name,
+            email: onboardingData.email,
+            phone: onboardingData.phone,
+            address: onboardingData.address,
+            id: Date.now(),
+          };
+
+        const priceData = getPrice();
+        const booking = {
+          id: Date.now(),
+          userId: user.id,
+          frequency: onboardingData.frequency,
+          day: onboardingData.day,
+          time: onboardingData.time,
+          rooms: onboardingData.rooms,
+          bathrooms: onboardingData.bathrooms,
+          address: onboardingData.address,
+          price: priceData.discountedPrice,
+          discount: priceData.discount,
+          status: 'pending',
+          createdAt: new Date().toISOString(),
+        };
+
+        await saveUser(user);
+        await saveBookings([...bookings, booking]);
+        setStep('home');
+      };
+
+      const updateBooking = async (bookingId, updates) => {
+        const updatedBookings = bookings.map((b) => {
+          if (b.id === bookingId) {
+            const priceData = getPrice(updates.rooms ?? b.rooms, updates.bathrooms ?? b.bathrooms, updates.frequency ?? b.frequency);
+            return { ...b, ...updates, price: priceData.discountedPrice, discount: priceData.discount };
+          }
+          return b;
+        });
+        await saveBookings(updatedBookings);
+        setEditingBooking(null);
+        setEditingDraft(null);
+      };
+
+      const deleteBooking = async (bookingId) => {
+        if (window.confirm('Ert tú vís/ur í, at tú vilt strika hesa bókingina?')) {
+          await saveBookings(bookings.filter((b) => b.id !== bookingId));
+        }
+      };
+
+      const StepIndicator = ({ currentStep }) => {
+        const steps = ['account', 'frequency', 'day', 'time', 'details'];
+        const currentIndex = Math.max(steps.indexOf(currentStep), 0);
+
+        return (
+          <div className="flex items-center justify-center gap-2 mb-8">
+            {steps.map((_, idx) => (
+              <React.Fragment key={idx}>
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold ${
+                    idx <= currentIndex ? 'bg-teal-500 text-white' : 'bg-gray-200 text-gray-500'
+                  }`}
+                >
+                  {idx + 1}
+                </div>
+                {idx < steps.length - 1 && <div className="w-8 h-0.5 bg-gray-300"></div>}
+              </React.Fragment>
+            ))}
+          </div>
+        );
+      };
+
+      const renderHeader = (showBack = false) => (
+        <header className="bg-white border-b px-4 py-4 sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={() => setStep(currentUser ? 'home' : 'welcome')}>
+              <Sparkles className="w-6 h-6 text-teal-500" />
+              <div className="text-lg font-bold text-gray-900 leading-tight">
+                HEIMA
+                <br />
+                REINGERÐ
+              </div>
+            </div>
+            {showBack && (
+              <button onClick={() => setStep(currentUser ? 'home' : 'welcome')} className="text-gray-600 hover:text-gray-900">
+                <ArrowLeft className="w-6 h-6" />
+              </button>
+            )}
+          </div>
+        </header>
+      );
+
+      const renderFormShell = (content, currentStep) => (
+        <div className="min-h-screen bg-gray-50">
+          {renderHeader(true)}
+          <div className="max-w-3xl mx-auto px-4 py-12">
+            <StepIndicator currentStep={currentStep} />
+            <div className="bg-white rounded-2xl shadow-sm p-8">{content}</div>
+          </div>
+        </div>
+      );
+
+      if (step === 'welcome') {
+        return (
+          <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+            {renderHeader(false)}
+
+            <div className="max-w-7xl mx-auto px-4 py-16">
+              <div className="text-center mb-20">
+                <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                  Eitt reint heim,
+                  <br />
+                  altíð
+                </h1>
+                <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                  Profesionell reingerð gjørd einfalt. Reglulig reingerð,
+                  <br />rímiligar prísir, tín ætlan.
+                </p>
+                <button
+                  onClick={() => setStep('account')}
+                  className="bg-teal-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-teal-600 inline-flex items-center gap-2"
+                >
+                  Byrja tína ókeypis bóking
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8 mb-20">
+                {[{
+                  title: 'Profesionell gøði',
+                  text: 'Røkt reingerðarfólk við góðum royndum',
+                  icon: Sparkles,
+                }, {
+                  title: 'Bøygilig tíð',
+                  text: 'Tín ætlan, tínar tíðir',
+                  icon: Clock,
+                }, {
+                  title: 'Tryggur tenast',
+                  text: 'Váttaðir og trúgvir arbeiðarar',
+                  icon: Shield,
+                }].map((item, idx) => (
+                  <div key={idx} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition">
+                    <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <item.icon className="w-8 h-8 text-teal-600" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">{item.title}</h3>
+                    <p className="text-gray-600 text-center">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-gradient-to-r from-teal-50 to-teal-100 rounded-2xl p-12 mb-20">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Spar pengar við regluligari reingerð</h2>
+                  <p className="text-gray-700 text-lg">Tú fært avslag alt eftir hvussu ofta tú velur reingerð</p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {frequencyOptions.slice(0, 3).map((option) => (
+                    <div key={option.value} className="bg-white rounded-xl p-6 text-center shadow-sm">
+                      <div className="text-4xl font-bold text-teal-600 mb-2">{option.discount}%</div>
+                      <div className="text-lg font-semibold text-gray-900 mb-1">{option.label}</div>
+                      <div className="text-gray-600 text-sm">{option.subtitle}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-20">
+                <div className="flex items-center justify-between mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900">Kundasøgur og Ráðlegging</h2>
+                  <button onClick={() => setStep('blog')} className="text-teal-600 font-medium hover:text-teal-700 flex items-center gap-2">
+                    Sí alt
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {blogPosts.map((post) => (
+                    <div key={post.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer" onClick={() => setStep('blog')}>
+                      <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
+                      <div className="p-6">
+                        <div className="text-xs font-semibold text-teal-600 mb-2">{post.category}</div>
+                        <h3 className="font-bold text-gray-900 mb-2 line-clamp-2">{post.title}</h3>
+                        <p className="text-sm text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
+                        <div className="flex items-center justify-between text-xs text-gray-500">
+                          <span>{post.date}</span>
+                          <span>{post.readTime}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gray-900 rounded-2xl p-12 text-white text-center mb-20">
+                <h2 className="text-3xl font-bold mb-4">Hvat siga okkara kundar?</h2>
+                <div className="grid md:grid-cols-3 gap-8 mt-12">
+                  {[{
+                    quote: 'Heima Reingerð hevur broytt mítt lív. Nú havi eg tíð til tað sum er týdningarmikið.',
+                    name: 'Anna, Tórshavn',
+                  }, {
+                    quote: 'Reingerðarfólkini eru so profesionell og vinarlig. Eg kann treysta teimum 100%.',
+                    name: 'Jón, Klaksvík',
+                  }, {
+                    quote: 'Einfalt at bóka, fleksibelar tíðir, og altíð eitt ljóst heim. Týddi heilt!',
+                    name: 'Maria, Runavík',
+                  }].map((item, idx) => (
+                    <div key={idx} className="bg-gray-800 rounded-xl p-6">
+                      <div className="flex items-center justify-center gap-1 mb-4">
+                        {[1, 2, 3, 4, 5].map((i) => (
+                          <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        ))}
+                      </div>
+                      <p className="text-gray-300 mb-4">{item.quote}</p>
+                      <div className="font-semibold">{item.name}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-6">Hvussu virkar tað?</h2>
+                  <div className="space-y-6">
+                    {[{
+                      title: 'Vel tína ætlan',
+                      text: 'Hvørja viku, hvønn 14. dag, ella hvønn mánaða',
+                    }, {
+                      title: 'Vel dag og tíð',
+                      text: 'Finn ein tíð sum passar títt skrá',
+                    }, {
+                      title: 'Njót eitt reint heim',
+                      text: 'Okkara profesionella reingerðarfólk koma og gera heimið títt ljóst',
+                    }].map((item, idx) => (
+                      <div key={idx} className="flex gap-4">
+                        <div className="bg-teal-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">
+                          {idx + 1}
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
+                          <p className="text-gray-600">{item.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl p-12 text-white">
+                  <h3 className="text-2xl font-bold mb-4">Byrja í dag</h3>
+                  <p className="mb-6">Fá tína fyrstu reingerð við 20% avslætti</p>
+                  <button
+                    onClick={() => setStep('account')}
+                    className="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 w-full"
+                  >
+                    Bóka nú
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <footer className="bg-gray-900 text-white py-12">
+              <div className="max-w-7xl mx-auto px-4">
+                <div className="grid md:grid-cols-4 gap-8">
+                  <div>
+                    <div className="flex items-center gap-2 mb-4">
+                      <Sparkles className="w-6 h-6 text-teal-400" />
+                      <span className="font-bold">HEIMA REINGERÐ</span>
+                    </div>
+                    <p className="text-gray-400 text-sm">Ger heimini frítt rein, uttan fyrimun</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4">Skjótir leinkir</h4>
+                    <div className="space-y-2 text-sm text-gray-400">
+                      <div className="hover:text-white cursor-pointer" onClick={() => setStep('welcome')}>Heim</div>
+                      <div className="hover:text-white cursor-pointer" onClick={() => setStep('account')}>Prísar</div>
+                      <div className="hover:text-white cursor-pointer" onClick={() => setStep('blog')}>
+                        Bloggur
+                      </div>
+                      <div className="hover:text-white cursor-pointer">Um okkum</div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4">Kunning</h4>
+                    <div className="space-y-2 text-sm text-gray-400">
+                      <div>teldupostur@heima.fo</div>
+                      <div>+298 123456</div>
+                      <div>Tórshavn, Føroyar</div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4">Fylg okkum</h4>
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 cursor-pointer">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                      </div>
+                      <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 cursor-pointer">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"
+                          />
+                          <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">© 2024 Heima Reingerð. Allir rættindi fyrivarðin.</div>
+              </div>
+            </footer>
+          </div>
+        );
+      }
+
+      if (step === 'blog') {
+        return (
+          <div className="min-h-screen bg-gray-50">
+            {renderHeader(true)}
+            <div className="max-w-7xl mx-auto px-4 py-12">
+              <div className="text-center mb-12">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">Bloggur og Kundasøgur</h1>
+                <p className="text-xl text-gray-600">Lær, lat teg inspirera, og hoyr frá okkara nøgdum kundum</p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-6 mb-12">
+                {blogPosts.map((post) => (
+                  <div key={post.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer" onClick={() => alert('Hetta er ein sýning.')}>
+                    <img src={post.image} alt={post.title} className="w-full h-64 object-cover" />
+                    <div className="p-6">
+                      <div className="text-xs font-semibold text-teal-600 mb-2">{post.category}</div>
+                      <h3 className="font-bold text-gray-900 mb-2 line-clamp-2">{post.title}</h3>
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
+                      <div className="flex items-center justify-between text-xs text-gray-500">
+                        <span>{post.date}</span>
+                        <span>{post.readTime}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-white rounded-2xl shadow-sm p-8 flex flex-col md:flex-row gap-8 items-center">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600" className="w-full md:w-1/2 rounded-xl object-cover" alt="Team" />
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Vit hava umsorgan fyri tínum heimi</h2>
+                  <p className="text-gray-600 mb-4">Okkara lið av loysnarfólkum arbeiðir altíð við tryggleika og áliti sum hægstu raðfesting. Vit brúka góðkend reinførusløg og hava royndir við alskyns heim.</p>
+                  <div className="flex items-center gap-3 text-teal-600 font-semibold">
+                    <Shield className="w-5 h-5" /> Trygdarváttan og góðkenning
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (step === 'account') {
+        const content = (
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Seg okkum eitt sindur um teg</h2>
+            <p className="text-gray-600 mb-8">Vit brúka hesa kunning til at samskifta við teg og finna rætta reingerðarfólkið.</p>
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Navn</label>
+                <input
+                  value={onboardingData.name}
+                  onChange={(e) => setOnboardingData({ ...onboardingData, name: e.target.value })}
+                  className="w-full border rounded-lg px-4 py-3"
+                  placeholder="Fulla navn"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Teldupostur</label>
+                <input
+                  value={onboardingData.email}
+                  onChange={(e) => setOnboardingData({ ...onboardingData, email: e.target.value })}
+                  className="w-full border rounded-lg px-4 py-3"
+                  placeholder="teldupostur@dømi.fo"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Telefon</label>
+                <input
+                  value={onboardingData.phone}
+                  onChange={(e) => setOnboardingData({ ...onboardingData, phone: e.target.value })}
+                  className="w-full border rounded-lg px-4 py-3"
+                  placeholder="+298 000000"
+                />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Bústaður</label>
+                <input
+                  value={onboardingData.address}
+                  onChange={(e) => setOnboardingData({ ...onboardingData, address: e.target.value })}
+                  className="w-full border rounded-lg px-4 py-3"
+                  placeholder="Gøta 1, Býur"
+                />
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <button onClick={() => setStep('welcome')} className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> Aftur
+              </button>
+              <button
+                onClick={() => setStep('frequency')}
+                disabled={!onboardingData.name || !onboardingData.email || !onboardingData.address}
+                className="bg-teal-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-600 disabled:opacity-50"
+              >
+                Fram
+              </button>
+            </div>
+          </div>
+        );
+        return renderFormShell(content, 'account');
+      }
+
+      if (step === 'frequency') {
+        const content = (
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Vel hvussu ofta</h2>
+            <p className="text-gray-600 mb-8">Spar upp til 15% við regluligari reingerð.</p>
+            <div className="grid md:grid-cols-2 gap-4 mb-8">
+              {frequencyOptions.map((option) => (
+                <div
+                  key={option.value}
+                  onClick={() => {
+                    setOnboardingData({ ...onboardingData, frequency: option.value });
+                    setStep('day');
+                  }}
+                  className={`border rounded-xl p-6 cursor-pointer hover:border-teal-500 transition ${
+                    onboardingData.frequency === option.value ? 'border-teal-500 shadow-md' : 'border-gray-200'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-bold text-gray-900">{option.label}</h3>
+                    <div className="bg-teal-100 text-teal-700 text-sm font-semibold px-3 py-1 rounded-full">-{option.discount}%</div>
+                  </div>
+                  <p className="text-gray-600">{option.subtitle}</p>
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-between">
+              <button onClick={() => setStep('account')} className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> Aftur
+              </button>
+              <button
+                onClick={() => setStep('day')}
+                disabled={!onboardingData.frequency}
+                className="bg-teal-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-600 disabled:opacity-50"
+              >
+                Fram
+              </button>
+            </div>
+          </div>
+        );
+        return renderFormShell(content, 'frequency');
+      }
+
+      if (step === 'day') {
+        const content = (
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Vel dag</h2>
+            <p className="text-gray-600 mb-8">Kanna at dagurin riggar longu hjá okkara reingerðarfólkum.</p>
+            <div className="grid md:grid-cols-3 gap-4 mb-8">
+              {days.map((day) => (
+                <button
+                  key={day}
+                  onClick={() => setOnboardingData({ ...onboardingData, day })}
+                  className={`border rounded-xl px-4 py-3 text-left hover:border-teal-500 transition ${
+                    onboardingData.day === day ? 'border-teal-500 shadow-md bg-teal-50' : 'border-gray-200'
+                  }`}
+                >
+                  <div className="font-semibold text-gray-900">{day}</div>
+                  <div className="text-sm text-gray-600">Pláss eftir kl. 08 - 18</div>
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between">
+              <button onClick={() => setStep('frequency')} className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> Aftur
+              </button>
+              <button
+                onClick={() => setStep('time')}
+                disabled={!onboardingData.day}
+                className="bg-teal-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-600 disabled:opacity-50"
+              >
+                Fram
+              </button>
+            </div>
+          </div>
+        );
+        return renderFormShell(content, 'day');
+      }
+
+      if (step === 'time') {
+        const content = (
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Vel tíð</h2>
+            <p className="text-gray-600 mb-8">Vit senda boð, um vit eiga at flyta nakað.</p>
+            <div className="grid md:grid-cols-2 gap-4 mb-8">
+              {timeSlots.map((slot) => (
+                <button
+                  key={slot}
+                  onClick={() => setOnboardingData({ ...onboardingData, time: slot })}
+                  className={`border rounded-xl px-4 py-3 text-left hover:border-teal-500 transition ${
+                    onboardingData.time === slot ? 'border-teal-500 shadow-md bg-teal-50' : 'border-gray-200'
+                  }`}
+                >
+                  <div className="font-semibold text-gray-900">{slot}</div>
+                  <div className="text-sm text-gray-600">Tíðarrúm við størst møguleika</div>
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between">
+              <button onClick={() => setStep('day')} className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> Aftur
+              </button>
+              <button
+                onClick={() => setStep('details')}
+                disabled={!onboardingData.time}
+                className="bg-teal-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-600 disabled:opacity-50"
+              >
+                Fram
+              </button>
+            </div>
+          </div>
+        );
+        return renderFormShell(content, 'time');
+      }
+
+      if (step === 'details') {
+        const price = getPrice();
+        const content = (
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Smálutir</h2>
+            <p className="text-gray-600 mb-8">Vel hvussu stórt títt heim er, so vit kunnu áseta rættan tíma.</p>
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="border rounded-xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <div className="font-semibold text-gray-900">Stovur</div>
+                    <div className="text-sm text-gray-600">Inkl. køkur</div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setOnboardingData({ ...onboardingData, rooms: Math.max(1, onboardingData.rooms - 1) })}
+                      className="w-10 h-10 rounded-full border flex items-center justify-center"
+                    >
+                      -
+                    </button>
+                    <div className="text-xl font-bold">{onboardingData.rooms}</div>
+                    <button
+                      onClick={() => setOnboardingData({ ...onboardingData, rooms: Math.min(7, onboardingData.rooms + 1) })}
+                      className="w-10 h-10 rounded-full border flex items-center justify-center"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="border rounded-xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <div className="font-semibold text-gray-900">Bað</div>
+                    <div className="text-sm text-gray-600">Regluligt ella djúpt</div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setOnboardingData({ ...onboardingData, bathrooms: Math.max(1, onboardingData.bathrooms - 1) })}
+                      className="w-10 h-10 rounded-full border flex items-center justify-center"
+                    >
+                      -
+                    </button>
+                    <div className="text-xl font-bold">{onboardingData.bathrooms}</div>
+                    <button
+                      onClick={() => setOnboardingData({ ...onboardingData, bathrooms: Math.min(2, onboardingData.bathrooms + 1) })}
+                      className="w-10 h-10 rounded-full border flex items-center justify-center"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 border rounded-xl p-6 mb-8">
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-gray-700">Grundprísur</div>
+                <div className="font-semibold">{price.basePrice} kr.</div>
+              </div>
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-gray-700">Avslag</div>
+                <div className="text-green-600 font-semibold">-{price.discount}%</div>
+              </div>
+              <div className="flex items-center justify-between text-lg font-bold">
+                <div>Endaligur prísur</div>
+                <div>{price.discountedPrice} kr.</div>
+              </div>
+            </div>
+
+            <div className="flex justify-between">
+              <button onClick={() => setStep('time')} className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> Aftur
+              </button>
+              <button
+                onClick={completeOnboarding}
+                className="bg-teal-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-600"
+              >
+                Staðfest bóking
+              </button>
+            </div>
+          </div>
+        );
+        return renderFormShell(content, 'details');
+      }
+
+      const renderBookingCard = (booking) => {
+        const isEditing = editingBooking === booking.id;
+        const draft = editingDraft || booking;
+        return (
+          <div className="bg-white rounded-xl p-6 shadow-sm border" key={booking.id}>
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <div className="text-sm text-teal-600 font-semibold">{booking.frequency}</div>
+                <h3 className="text-xl font-bold text-gray-900">{booking.day} · {booking.time}</h3>
+                <div className="text-gray-600 text-sm">{booking.address}</div>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => { setEditingBooking(booking.id); setEditingDraft({ ...booking }); }} className="text-teal-600 hover:text-teal-700">
+                  <Edit3 className="w-5 h-5" />
+                </button>
+                <button onClick={() => deleteBooking(booking.id)} className="text-red-600 hover:text-red-700">
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+            {!isEditing && (
+              <div className="grid grid-cols-2 gap-4 text-sm text-gray-700 mb-4">
+                <div className="flex items-center gap-2"><Home className="w-4 h-4" /> Stovur: {booking.rooms}</div>
+                <div className="flex items-center gap-2"><Shield className="w-4 h-4" /> Bað: {booking.bathrooms}</div>
+                <div className="flex items-center gap-2"><Clock className="w-4 h-4" /> {booking.time}</div>
+                <div className="flex items-center gap-2"><Calendar className="w-4 h-4" /> {booking.day}</div>
+              </div>
+            )}
+            {isEditing && (
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1">Dagur</label>
+                  <select
+                    value={draft.day}
+                    onChange={(e) => setEditingDraft({ ...draft, day: e.target.value })}
+                    className="w-full border rounded-lg px-3 py-2"
+                  >
+                    {days.map((d) => (
+                      <option key={d}>{d}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1">Tíð</label>
+                  <select
+                    value={draft.time}
+                    onChange={(e) => setEditingDraft({ ...draft, time: e.target.value })}
+                    className="w-full border rounded-lg px-3 py-2"
+                  >
+                    {timeSlots.map((slot) => (
+                      <option key={slot}>{slot}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1">Frekvens</label>
+                  <select
+                    value={draft.frequency}
+                    onChange={(e) => setEditingDraft({ ...draft, frequency: e.target.value })}
+                    className="w-full border rounded-lg px-3 py-2"
+                  >
+                    {frequencyOptions.map((fo) => (
+                      <option key={fo.value} value={fo.value}>
+                        {fo.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1">Stovur / Bað</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      max="7"
+                      value={draft.rooms}
+                      onChange={(e) => setEditingDraft({ ...draft, rooms: Number(e.target.value) })}
+                      className="w-full border rounded-lg px-3 py-2"
+                    />
+                    <input
+                      type="number"
+                      min="1"
+                      max="2"
+                      value={draft.bathrooms}
+                      onChange={(e) => setEditingDraft({ ...draft, bathrooms: Number(e.target.value) })}
+                      className="w-full border rounded-lg px-3 py-2"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+            <div className="flex items-center justify-between">
+              <div className="text-gray-800 font-semibold">{booking.price} kr. / vitjan</div>
+              {isEditing ? (
+                <div className="flex gap-3">
+                  <button onClick={() => { setEditingBooking(null); setEditingDraft(null); }} className="text-gray-600">Avlýs</button>
+                  <button onClick={() => updateBooking(booking.id, editingDraft)} className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600">Goym</button>
+                </div>
+              ) : (
+                <div className="text-sm text-gray-500">Status: {booking.status}</div>
+              )}
+            </div>
+          </div>
+        );
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-50">
+          {renderHeader(false)}
+          <div className="max-w-7xl mx-auto px-4 py-10 space-y-10">
+            <div className="bg-white rounded-2xl shadow-sm p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div>
+                <div className="text-sm text-gray-500 mb-1">Vælkomin aftur</div>
+                <h1 className="text-3xl font-bold text-gray-900">{currentUser?.name || 'Nýggjur brúkari'}</h1>
+                <div className="text-gray-600">{currentUser?.address || 'Byrja við at leggja tilfar inn.'}</div>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <button
+                  onClick={() => {
+                    resetOnboarding();
+                    setStep(currentUser ? 'frequency' : 'account');
+                  }}
+                  className="bg-teal-500 text-white px-5 py-3 rounded-lg font-semibold hover:bg-teal-600 flex items-center gap-2"
+                >
+                  <Plus className="w-5 h-5" /> Ný bóking
+                </button>
+                <button onClick={() => setStep('blog')} className="border border-gray-200 px-5 py-3 rounded-lg font-semibold text-gray-700 hover:border-gray-300 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5" /> Les bloggin
+                </button>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-2xl shadow-sm p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <TrendingUp className="w-6 h-6 text-teal-600" />
+                  <div>
+                    <div className="text-xs text-gray-500">Síðstu sparingar</div>
+                    <div className="text-xl font-bold text-gray-900">{bookings.length ? `${bookings.length * 150} kr.` : '0 kr.'}</div>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600">Fá í miðal 150 kr. í avslætti pr. vitjan við regluligari tíð.</p>
+              </div>
+              <div className="bg-white rounded-2xl shadow-sm p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Users className="w-6 h-6 text-teal-600" />
+                  <div>
+                    <div className="text-xs text-gray-500">Reingerðarfólk</div>
+                    <div className="text-xl font-bold text-gray-900">12 á vakt</div>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600">Vit hava lið í Tórshavn, Runavík, og Klaksvík.</p>
+              </div>
+              <div className="bg-white rounded-2xl shadow-sm p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Award className="w-6 h-6 text-teal-600" />
+                  <div>
+                    <div className="text-xs text-gray-500">Trygdarváttan</div>
+                    <div className="text-xl font-bold text-gray-900">100% váttað</div>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600">Allir starvsfólk hava váttan og bakgrundarkanning.</p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-900">Tínar bókingar</h2>
+                {!bookings.length && <div className="text-sm text-gray-500">Eingi bókingar enn</div>}
+              </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                {bookings.map((booking) => renderBookingCard(booking))}
+                {!bookings.length && (
+                  <div className="bg-white border rounded-xl p-6 text-center text-gray-600">
+                    Tú hevur onga bóking enn. Trýst á "Ný bóking" fyri at byrja.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-sm p-8 grid md:grid-cols-3 gap-6">
+              {[{
+                title: 'Trygdarvørður húsini',
+                text: 'Vit hava fulla trygging og váttan av starvsfólkunum.',
+                icon: Shield,
+              }, {
+                title: 'Vinarligt lið',
+                text: 'Vit setur altíð sama fólk til tín túr fyri tryggleika.',
+                icon: Heart,
+              }, {
+                title: 'Stuðul altíð',
+                text: 'Vit svara boðum innan 30 minuttir á arbeiðstíð.',
+                icon: MessageCircle,
+              }].map((item, idx) => (
+                <div key={idx} className="flex gap-4">
+                  <div className="bg-teal-50 w-12 h-12 rounded-full flex items-center justify-center text-teal-600">
+                    <item.icon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900">{item.title}</div>
+                    <div className="text-gray-600 text-sm">{item.text}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    createRoot(document.getElementById('root')).render(<HeimaReingerd />);
+  </script>
+</body>
+</html>
