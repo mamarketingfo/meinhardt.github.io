@@ -1,0 +1,17 @@
+{
+  "name": "meinhardt.github.io",
+  "version": "1.0.0",
+  "description": "Static site with Heima Reingerð demo",
+  "scripts": {
+    "start": "python3 -m http.server 4173",
+    "serve": "python3 -m http.server 4173"
+  },
+  "keywords": [
+    "static",
+    "demo",
+    "heima"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
